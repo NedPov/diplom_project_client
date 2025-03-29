@@ -20,7 +20,7 @@ const rollsSlice = createSlice({
     reducers:{},
     extraReducers: (builder) =>{
         builder
-        .addCase(loadRolls, fulfilled, (state, action) => {
+        .addCase(loadRolls.fulfilled, (state, action) => {
             state.rolls = action.payload;
         })
     }
