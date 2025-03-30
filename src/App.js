@@ -6,6 +6,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Components/pages/Home/Home';
 import Menu from './Components/Menu';
 import Rolls from './Components/pages/Rolls/Rolls';
+import Sauces from './Components/pages/Sauces/Sauces';
+import Drinks from './Components/pages/Drinks/Drinks';
+import Sushi from './Components/pages/Sushi/Sushi';
+import Sets from './Components/pages/Sets/Sets';
 
 function App() {
   return (
@@ -17,8 +21,11 @@ function App() {
           <main className='flex-grow-1'>
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/sets' element={<Sets />} />
+              <Route path='/sushi' element={<Sushi />} />
               <Route path='/rolls' element={<Rolls />} />
-              
+              <Route path='/sauces' element={<Sauces />} />
+              <Route path='/drinks' element={<Drinks />} />
             </Routes>
           </main>
         </Router>

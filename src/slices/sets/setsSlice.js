@@ -20,7 +20,7 @@ const setsSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loadSets.fulfilled, (state, action) => {
-                state.sauces = action.payload;
+                state.sets = action.payload;
             })
     }
 });

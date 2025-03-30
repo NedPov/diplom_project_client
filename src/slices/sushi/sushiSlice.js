@@ -20,7 +20,7 @@ const sushiSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(loadSushi.fulfilled, (state, action) => {
-                state.sauces = action.payload;
+                state.sushi = action.payload;
             })
     }
 });
