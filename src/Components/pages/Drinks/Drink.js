@@ -3,6 +3,8 @@ import { useEffect } from "react";
 
 import { loadDrinks } from "../../../slices/drinks/drinksSlice";
 
+import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
+
 
 function Drink() {
 
@@ -23,6 +25,7 @@ function Drink() {
             {
                 drinks.map((drink) => (
                     <div className="card" style={{ width: '22rem' }} key={drink.id}>
+                        <IconsEditOrDelete />
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">

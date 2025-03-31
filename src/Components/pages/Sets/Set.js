@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { loadSets } from "../../../slices/sets/setsSlice";
 
 
+import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
+
+
 function Set() {
 
     const dispatch = useDispatch();
@@ -24,6 +27,7 @@ function Set() {
                 sets.map((set) => (
                     <div className="card" style={{ width: '22rem' }} key={set.id}>
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
+                        <IconsEditOrDelete />
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{set.title}</h5>

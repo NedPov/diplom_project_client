@@ -1,7 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
+
 import { loadRolls } from "../../../slices/rols/rollsSlice";
+
+import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 
 function Roll() {
@@ -22,7 +25,8 @@ function Roll() {
 
             {
                 rolls.map((roll) => (
-                    <div className="card" style={{ width: '22rem' }} key={roll.id}>
+                    <div className="card position-relative" style={{ width: '22rem' }} key={roll.id} >
+                        <IconsEditOrDelete />
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">

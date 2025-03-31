@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { loadSushi } from "../../../slices/sushi/sushiSlice";
 
+import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 function SushiCard() {
 
@@ -24,6 +25,8 @@ function SushiCard() {
                 sushi.map((sushiEl) => (
                     <div className="card" style={{ width: '22rem' }} key={sushiEl.id}>
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
+                        
+                        <IconsEditOrDelete />
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{sushiEl.title}</h5>

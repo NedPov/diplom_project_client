@@ -3,6 +3,7 @@ import { useEffect } from "react";
 
 import { loadSauces } from "../../../slices/sauces/saucesSlice";
 
+import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 function Sauce() {
 
@@ -23,6 +24,7 @@ function Sauce() {
             {
                 sauces.map((sauce) => (
                     <div className="card" style={{ width: '22rem' }} key={sauce.id}>
+                        <IconsEditOrDelete />
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
