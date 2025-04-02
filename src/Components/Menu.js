@@ -1,5 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 
+import logo from '../images/cDttXgSOVH8.png'
+
 import Basket from "./Components/Basket";
 import Register from "./Components/Register";
 
@@ -11,7 +13,9 @@ function Menu() {
             <nav className="navbar navbar-expand-lg bg-body-tertiary p-0 ">
                 <div className="container-fluid bg-dark">
                     {/* лого */}
-                    <div className="bg-white ms-5" style={{ width: '50px', height: '50px' }}>ЛОГО</div>
+                    <div className="bg-dark ms-5">
+                        <img src={logo} alt="" style={{ width: '50px', height: '50px' }} />
+                    </div>
 
                     <div className="collapse navbar-collapse d-flex justify-content-center ">
                         <ul className="navbar-nav gap-4 fs-5 fw-bold">

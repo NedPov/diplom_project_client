@@ -12,6 +12,8 @@ import Sushi from './Components/pages/Sushi/Sushi';
 import Sets from './Components/pages/Sets/Sets';
 
 import Basket from './Components/pages/Basket/Basket';
+import Register from './Components/pages/Authenticate/Register/Register';
+import Login from './Components/pages/Authenticate/Login/Login';
 
 import AdminPanel from './Components/adminRecurses/AdminPanel';
 
@@ -32,6 +34,9 @@ function App() {
               <Route path='/drinks' element={<Drinks />} />
 
               <Route path='/basket' element={<Basket />} />
+
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
               {/* adminPanel */}
               <Route path='/adminPanel' element={<AdminPanel />} />
             </Routes>
