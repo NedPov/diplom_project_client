@@ -28,6 +28,8 @@ function Login() {
         // вызов метода
         // dispatch(loginUser({ username, password }));
 
+        console.log({ username, password});
+
         // сброс состояний
         setUsername('');
         setPassword('');

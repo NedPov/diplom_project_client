@@ -12,7 +12,7 @@ function Basket() {
                 <li className="nav-item ">
                     <NavLink className="nav-link text-white" to='/basket'>
                         <button className="btn btn-outline-danger  btn-lg">
-                            <FaBasketShopping />
+                            <FaBasketShopping /> 507p
                         </button>
                     </NavLink>
                 </li>

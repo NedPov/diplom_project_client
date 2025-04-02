@@ -35,6 +35,7 @@ function App() {
 
               <Route path='/basket' element={<Basket />} />
 
+              {/* Authenticate */}
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               {/* adminPanel */}

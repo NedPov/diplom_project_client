@@ -12,8 +12,8 @@ function Register() {
     const [password, setPassword] = useState('');
 
     //  // redux
-     const navigate = useNavigate();
-     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     // // state
     // const error = useSelector(state => state.authenticate.error);
@@ -26,7 +26,7 @@ function Register() {
 
         // вызов метода
         // dispatch(registerUser({ username, password }));
-
+        console.log({ username, password });
         // сброс состояний
         setUsername('');
         setPassword('');
