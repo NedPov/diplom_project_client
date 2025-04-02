@@ -11,6 +11,10 @@ import Drinks from './Components/pages/Drinks/Drinks';
 import Sushi from './Components/pages/Sushi/Sushi';
 import Sets from './Components/pages/Sets/Sets';
 
+import Basket from './Components/pages/Basket/Basket';
+
+import AdminPanel from './Components/adminRecurses/AdminPanel';
+
 function App() {
   return (
     <>
@@ -26,6 +30,10 @@ function App() {
               <Route path='/rolls' element={<Rolls />} />
               <Route path='/sauces' element={<Sauces />} />
               <Route path='/drinks' element={<Drinks />} />
+
+              <Route path='/basket' element={<Basket />} />
+              {/* adminPanel */}
+              <Route path='/adminPanel' element={<AdminPanel />} />
             </Routes>
           </main>
         </Router>
