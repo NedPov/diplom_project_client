@@ -96,16 +96,54 @@ db.connect(err => {
             console.log('Таблицы пользователей готова к использованию')
         });
 
+        // ТАБЛИЦЫ ПРОДУКЦИИ
+        // ===================================================================================================================
+        // _________________________________________________
+        // Переменная для создания таблицы СЕТОВ
+        const createTableSets = 'create table if not exists sets(id int auto_increment primary key, title varchar(255) not null, description varchar(255), price smallint';
 
-        // Переменная для создания таблицы ЗАДАЧ
-        const createTableTodos = 'create table if not exists sets(id int auto_increment primary key, title varchar(255) not null, description varchar(255), price smallint';
-
-        // Создание таблицы ЗАДАЧ в выбраной БД
-        db.query(createTableTodos, (err) => {
-            if (err) return console.error('Ошибка создания таблицы задач', err);
-            console.log('Таблица задач готова к использованию');
+        // Создание таблицы СЕТОВ в выбраной БД
+        db.query(createTableSets, (err) => {
+            if (err) return console.error('Ошибка создания таблицы сетов', err);
+            console.log('Таблица сетов готова к использованию');
         });
+        // _________________________________________________
+        // Переменная для создания таблицы СУШИ
+        const createTableSushi = 'create table if not exists sushi(id int auto_increment primary key, title varchar(255) not null, description varchar(255), price smallint';
 
+        // Создание таблицы СУШИ в выбраной БД
+        db.query(createTableSushi, (err) => {
+            if (err) return console.error('Ошибка создания таблицы суши', err);
+            console.log('Таблица суши готова к использованию');
+        });
+        // _________________________________________________
+        // Переменная для создания таблицы РОЛЛОВ
+        const createTableRolls = 'create table if not exists rolls(id int auto_increment primary key, title varchar(255) not null, description varchar(255), price smallint';
+
+        // Создание таблицы РОЛЛОВ в выбраной БД
+        db.query(createTableRolls, (err) => {
+            if (err) return console.error('Ошибка создания таблицы роллов', err);
+            console.log('Таблица роллов готова к использованию');
+        });
+        // _________________________________________________
+        // Переменная для создания таблицы СОУСОВ
+        const createTableSauces = 'create table if not exists sauces(id int auto_increment primary key, title varchar(255) not null, description varchar(255), price smallint';
+
+        // Создание таблицы СОУСОВ в выбраной БД
+        db.query(createTableSauces, (err) => {
+            if (err) return console.error('Ошибка создания таблицы соусов', err);
+            console.log('Таблица соусов готова к использованию');
+        });
+        // _________________________________________________
+        // Переменная для создания таблицы НАПИТКОВ
+        const createTableDrinks = 'create table if not exists drinks(id int auto_increment primary key, title varchar(255) not null, description varchar(255), price smallint';
+
+        // Создание таблицы НАПИТКОВ в выбраной БД
+        db.query(createTableDrinks, (err) => {
+            if (err) return console.error('Ошибка создания таблицы напитков', err);
+            console.log('Таблица напитков готова к использованию');
+        });
+        // ===================================================================================================================
 
         // Переменная для создания РЕФРЕШ-ТОКЕНА
         const createTableRefreshTokens = 'create table if not exists refresh_tokens(id int auto_increment primary key, token text not null unique, user_id int not null, foreign key (user_id) references users(id))';
@@ -117,7 +155,6 @@ db.connect(err => {
         });
     });
 });
-
 // ============================================================================================
 
 
@@ -213,7 +250,7 @@ app.post('/register', async (req, res) => {
 
     console.log(username);
     console.log(password);
-    
+
     // Хэшируем пароль
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -317,36 +354,115 @@ app.post('/logout', (req, res) => {
 
 
 
-// РАБОТА С ЗАДАЧАМИ
+// РАБОТА С ПРОДУКЦИЕЙ
 // ============================================================================================
-// ! Изменить прием и отправку с todos на tasks
 
-// ПОЛУЧЕНИЕ ЗАДАЧ
-app.get('/todos', authenticateToken, (req, res) => {
-    db.query('select todos.*, users.username from todos left join users on todos.user_id = users.id', (err, results) => {
-        if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить задачи' });
+// ПОЛУЧЕНИЕ ПРОДУКЦИИ {
+// ПОЛУЧЕНИЕ СЕТОВ
+app.get('/sets', authenticateToken, (req, res) => {
+    db.query('select * from sets', (err, results) => {
+        if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить сеты' });
 
         res.json(results);
     });
 });
 
+// ПОЛУЧЕНИЕ СУШИ
+app.get('/sushi', authenticateToken, (req, res) => {
+    db.query('select * from sushi', (err, results) => {
+        if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить суши' });
 
-
-// ДОБАВЛЕНИЕ ЗАДАЧИ
-app.post('/todos', authenticateToken, (req, res) => {
-    // Достаем текст задачки из запроса, из тела
-    const { text, deadline, priority } = req.body;
-
-    // Добваляем задачу в БД
-    db.query('insert into todos(text, deadline, priority) values (?, ?, ?)', [text, deadline, priority], (err, result) => {
-        if (err) return res.status(500).json({ message: 'Не получилось добавить задачу', error: err.message });
-
-        // Отправляем ответ
-        res.json({ id: result.insertId, text, deadline, priority });
+        res.json(results);
     });
 });
 
+// ПОЛУЧЕНИЕ РОЛЛОВ
+app.get('/sets', authenticateToken, (req, res) => {
+    db.query('select * from rolls', (err, results) => {
+        if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить роллы' });
 
+        res.json(results);
+    });
+});
+
+// ПОЛУЧЕНИЕ СОУСОВ
+app.get('/sets', authenticateToken, (req, res) => {
+    db.query('select * from sauces', (err, results) => {
+        if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить соусы' });
+
+        res.json(results);
+    });
+});
+
+// ПОЛУЧЕНИЕ НАПИТКОВ
+app.get('/sets', authenticateToken, (req, res) => {
+    db.query('select * from drinks', (err, results) => {
+        if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить напитки' });
+
+        res.json(results);
+    });
+});
+// }
+
+
+
+// ДОБАВЛЕНИЕ ПРОДУКЦИИ{
+// СЕТЫ
+app.post('/sets', authenticateToken, (req, res) => {
+    // Достаем данные из запроса, из тела
+    const { title, description, price } = req.body;
+    // Добваляем сет в БД
+    db.query('insert into sets(title, description, price) values (?, ?, ?)', [title, description, price], (err, result) => {
+        if (err) return res.status(500).json({ message: 'Не получилось добавить сет', error: err.message });
+        // Отправляем ответ
+        res.json({ id: result.insertId, title, description, price });
+    });
+});
+// СУШИ
+app.post('/sushi', authenticateToken, (req, res) => {
+    // Достаем данные из запроса, из тела
+    const { title, description, price } = req.body;
+    // Добваляем суши в БД
+    db.query('insert into sushi(title, description, price) values (?, ?, ?)', [title, description, price], (err, result) => {
+        if (err) return res.status(500).json({ message: 'Не получилось добавить суши', error: err.message });
+        // Отправляем ответ
+        res.json({ id: result.insertId, title, description, price });
+    });
+});
+// РОЛЛЫ
+app.post('/rolls', authenticateToken, (req, res) => {
+    // Достаем данные из запроса, из тела
+    const { title, description, price } = req.body;
+    // Добваляем роллы в БД
+    db.query('insert into rolls(title, description, price) values (?, ?, ?)', [title, description, price], (err, result) => {
+        if (err) return res.status(500).json({ message: 'Не получилось добавить роллы', error: err.message });
+        // Отправляем ответ
+        res.json({ id: result.insertId, title, description, price });
+    });
+});
+// СОУСЫ
+app.post('/sauces', authenticateToken, (req, res) => {
+    // Достаем данные из запроса, из тела
+    const { title, description, price } = req.body;
+    // Добваляем соусы в БД
+    db.query('insert into sauces(title, description, price) values (?, ?, ?)', [title, description, price], (err, result) => {
+        if (err) return res.status(500).json({ message: 'Не получилось добавить соусы', error: err.message });
+        // Отправляем ответ
+        res.json({ id: result.insertId, title, description, price });
+    });
+});
+// НАПИТКИ
+app.post('/drinks', authenticateToken, (req, res) => {
+    // Достаем данные из запроса, из тела
+    const { title, description, price } = req.body;
+    // Добваляем напитки в БД
+    db.query('insert into drinks(title, description, price) values (?, ?, ?)', [title, description, price], (err, result) => {
+        if (err) return res.status(500).json({ message: 'Не получилось добавить напитки', error: err.message });
+        // Отправляем ответ
+        res.json({ id: result.insertId, title, description, price });
+    });
+});
+// }
 
 // ИЗМЕНЕНИЕ ЗАДАЧИ
 app.put('/todos/:id/edit', authenticateToken, (req, res) => {
