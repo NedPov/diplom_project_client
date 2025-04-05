@@ -377,7 +377,7 @@ app.get('/sushi', authenticateToken, (req, res) => {
 });
 
 // ПОЛУЧЕНИЕ РОЛЛОВ
-app.get('/sets', authenticateToken, (req, res) => {
+app.get('/rolls', authenticateToken, (req, res) => {
     db.query('select * from rolls', (err, results) => {
         if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить роллы' });
 
@@ -386,7 +386,7 @@ app.get('/sets', authenticateToken, (req, res) => {
 });
 
 // ПОЛУЧЕНИЕ СОУСОВ
-app.get('/sets', authenticateToken, (req, res) => {
+app.get('/sauces', authenticateToken, (req, res) => {
     db.query('select * from sauces', (err, results) => {
         if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить соусы' });
 
@@ -395,7 +395,7 @@ app.get('/sets', authenticateToken, (req, res) => {
 });
 
 // ПОЛУЧЕНИЕ НАПИТКОВ
-app.get('/sets', authenticateToken, (req, res) => {
+app.get('/drinks', authenticateToken, (req, res) => {
     db.query('select * from drinks', (err, results) => {
         if (err) return res.status(500).json({ error: err.message, message: 'Не получилось получить напитки' });
 

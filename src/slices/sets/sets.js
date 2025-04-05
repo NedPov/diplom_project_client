@@ -27,14 +27,13 @@ export const addSets = async ({title, description, price }) => {
     return response.data;
 };
 
-
 // Запрос: Изменение сета
 export const editSets = async (title, description, price, setsId) => {
     const response = await api.put(`/${setsId}/edit`, { title, description, price });
     return response.data;
 };
 
-// Запрос: Удаление сетаа
+// Запрос: Удаление сета
 export const deleteSets = async (id) => {
     const response = await api.delete(`/${id}`);
     return response.data.id;
