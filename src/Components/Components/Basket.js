@@ -9,7 +9,11 @@ function Basket() {
 
 
     // Массив продукции
-    const basketArr = useSelector((state) => state.basket.basketArray);
+    let basketArr = useSelector((state) => state.basket.basketArray);
+    
+    if (basketArr.length == 0) {
+        basketArr = JSON.parse(localStorage.getItem('basketArr'));
+    }
     console.log(basketArr);
 
 

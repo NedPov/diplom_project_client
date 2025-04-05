@@ -19,7 +19,7 @@ export const deleteBasketEl = createAsyncThunk('basket/deleteBasketEl', async (i
 
 // НАЧАЛЬНОЕ СОСТОЯНИЕ
 const initialState = {
-    basketArray: [],
+    basketArray: JSON.parse(localStorage.getItem('basketArr')) || [],
 };
 
 
@@ -30,12 +30,13 @@ const basketSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            // Добавление напитка
+            // Добавление продукта
             .addCase(addBasketEl.fulfilled, (state, action) => {
                 state.basketArray.push(action.payload);
+                localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
             })
 
-            // Удаление напитка
+            // Удаление продукта
             .addCase(deleteBasketEl.fulfilled, (state, action) => {
                 state.basketArray = state.basketArray.filter(basketArr => basketArr.id !== action.payload);
             })
