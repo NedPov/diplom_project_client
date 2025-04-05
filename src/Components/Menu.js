@@ -70,15 +70,17 @@ function Menu() {
                     </div>
                     {/* Админка */}
                     {userRole === 'admin' && (
-                        <div className="me-5 p-2">
+                        <div className="me-5 p-2 ">
+                            <button className="btn btn-outline-warning m-1">
+                                <NavLink className="nav-link" to='/adminPanel'>Админская панель</NavLink>
+                            </button>
                             <button className="btn btn-outline-warning">
-                                <NavLink className="nav-link" to='/adminPanel'> Админская панель</NavLink>
+                                <NavLink className="nav-link" to='/orders'>Заказы</NavLink>
                             </button>
                         </div>
                     )}
                     {/* Корзина */}
                     <Basket />
-
                     {/* Регистрация */}
                     {isAuthenticated === true ? (
                         <li className="nav-item dropdown ms-auto">

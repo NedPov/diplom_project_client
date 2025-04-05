@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 import { loadSets } from "../../../slices/sets/setsSlice";
+import { addBasketEl } from "../../../slices/basket/basketSlice";
 
 
 import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
@@ -56,7 +57,9 @@ function Set() {
                                 <span className="fs-5">₽</span>
                             </div>
                             <div className="card-title fw-bold ">
-                                <button type="button" className="btn btn-info fs-6">Добавить в корзину</button>
+                                <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(set))}>
+                                    Добавить в корзину
+                                </button>
                             </div>
                         </div>
                     </div>

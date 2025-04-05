@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -21,6 +21,7 @@ function Login() {
     // state
     const error = useSelector(state => state.authenticate.error);
     const isAuthenticated = useSelector(state => state.authenticate.isAuthenticated);
+    console.log(isAuthenticated);
 
 
     // отправка формы
@@ -35,13 +36,16 @@ function Login() {
         // сброс состояний
         setUsername('');
         setPassword('');
+
+    };
+
+    // effect для навигации
+    useEffect(() => {
         // Перенаправление на таски, если успешно зашли
         if (isAuthenticated) {
             navigate('/');
         }
-    };
-
-
+    }, [handleSubmit]);
 
 
 
@@ -59,7 +63,7 @@ function Login() {
                     <input type="text" className="form-control" placeholder="Введите имя" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className="form-group my-3">
-                    <input type="password" className="form-control" placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" autocomplete="on" className="form-control" placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
                 <button className="btn btn-outline-success my-2">Войти</button>

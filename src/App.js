@@ -16,6 +16,7 @@ import Register from './Components/pages/Authenticate/Register/Register';
 import Login from './Components/pages/Authenticate/Login/Login';
 
 import AdminPanel from './Components/adminRecurses/AdminPanel';
+import Orders from './Components/adminRecurses/Orders';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route path='/sauces' element={<Sauces />} />
               <Route path='/drinks' element={<Drinks />} />
 
+              {/* корзина */}
               <Route path='/basket' element={<Basket />} />
 
               {/* Authenticate */}
@@ -40,6 +42,7 @@ function App() {
               <Route path='/register' element={<Register />} />
               {/* adminPanel */}
               <Route path='/adminPanel' element={<AdminPanel />} />
+              <Route path='/orders' element={<Orders />} />
             </Routes>
           </main>
         </Router>

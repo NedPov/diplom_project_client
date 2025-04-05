@@ -55,7 +55,7 @@ function Register() {
                     <input type="text" className="form-control" placeholder="Введите имя" value={username} onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div className="form-group my-3">
-                    <input type="password" className="form-control" placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" autocomplete="on" className="form-control" placeholder="Введите пароль" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
                 <button className="btn btn-outline-success my-2" type="submit">Зарегестрироваться</button>
