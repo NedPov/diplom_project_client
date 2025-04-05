@@ -1,15 +1,38 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+import { fetchSushi, addSushi, editSushi, deleteSushi } from "./sushi";
 
-// ПОЛУЧЕНИЕ СУШИ
-export const loadSushi = createAsyncThunk('sauces/loadSushi', async () =>{
-    return [{title: "sushi1", description: "qwerty", id: 1, price: '1850'}, {title: "sushi2", description: "asdfgh", id: 2, price: '1300'}, {title: "sushi3", description: "zxcvbn", id: 3, price: '1150'},];
+
+
+// FETCH ЗАПРОСЫ
+// =========================================
+// Получение всех суши
+export const loadSushi = createAsyncThunk('sushi/loadSushi', async () => {
+    return await fetchSushi();
 });
+
+// Добавление суши
+export const addFetchSushi = createAsyncThunk('sushi/addFetchSushi', async ({ title, description, price }) => {
+    return await addSushi({ title, description, price });
+});
+
+// отправка на сервер измененного суши
+export const editFetchSushi = createAsyncThunk('sushi/editFetchSushi', async (title, description, price, setsId) => {
+    return await editSushi({ title, description, price, setsId });
+});
+
+// Удаление суши
+export const deleteFetchSushi = createAsyncThunk('sushi/deleteFetchSushi', async (id) => {
+    return await deleteSushi(id);
+});
+// =========================================
 
 
 
 const initialState = {
     sushi: [],
+    error: '',
+    message: '',
 };
 
 
@@ -19,8 +42,33 @@ const sushiSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // Получение всех сетов
             .addCase(loadSushi.fulfilled, (state, action) => {
                 state.sushi = action.payload;
+            })
+            .addCase(loadSushi.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            // Добавление сета
+            .addCase(addFetchSushi.fulfilled, (state, action) => {
+                state.sushi.push(action.payload);
+            })
+            .addCase(addFetchSushi.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            // Изменение сета
+            .addCase(editFetchSushi.fulfilled, (state, action) => {
+                // state.sushi.push(action.payload);
+            })
+            .addCase(editFetchSushi.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            // Удаление сета
+            .addCase(deleteFetchSushi.fulfilled, (state, action) => {
+                state.sushi = state.sushi.filter(sushiEl => sushiEl.id !== action.payload);
+            })
+            .addCase(deleteFetchSushi.rejected, (state, action) => {
+                state.error = action.payload;
             })
     }
 });
