@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+import { registerUser } from "../../../../slices/authenticate/authenticateSlice";
+
 
 
 
@@ -11,13 +13,13 @@ function Register() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    //  // redux
+    // redux
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // // state
-    // const error = useSelector(state => state.authenticate.error);
-    // const status = useSelector(state => state.authenticate.status);
+    // state
+    const error = useSelector(state => state.authenticate.error);
+    const status = useSelector(state => state.authenticate.status);
 
 
     // Метод отправки
@@ -25,7 +27,7 @@ function Register() {
         e.preventDefault();
 
         // вызов метода
-        // dispatch(registerUser({ username, password }));
+        dispatch(registerUser({ username, password }));
         console.log({ username, password });
         // сброс состояний
         setUsername('');
@@ -40,16 +42,13 @@ function Register() {
         <div className="container my-2">
 
             <h2 className="mb-4">Регистрация</h2>
-            {/* 
-            
+
             {error && (
                 <div className="alert alert-danger">{error}</div>
             )}
             {status && (
                 <div className="alert alert-success">{status}</div>
-            )} 
-            
-            */}
+            )}
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group my-3">

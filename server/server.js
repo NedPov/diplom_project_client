@@ -557,7 +557,7 @@ app.delete('/sets/:id', authenticateToken, (req, res) => {
     db.query('delete from sets where id = ?', [id], (err) => {
         // Обработка ошибки
         if (err) return res.status(500).json({ message: "Ошибка удаления сеты" });
-        res.json({ message: 'Сет удален' });
+        res.json({ message: 'Сет удален', id });
     });
 });
 

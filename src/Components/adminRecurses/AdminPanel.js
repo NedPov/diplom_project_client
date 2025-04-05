@@ -1,9 +1,12 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 function AdminPanel() {
+
+    // redux
+    const dispatch = useDispatch();
 
 
     // Состояния
@@ -12,8 +15,6 @@ function AdminPanel() {
     const [productPrice, setProductPrice] = useState('');
     const [productType, setProductType] = useState('');
     const [image, setImage] = useState('');
-
-
 
 
     // reset Формы
@@ -31,6 +32,8 @@ function AdminPanel() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // ДОБАВЛЕНИЕ ПРОДУКТА
+        // !add
 
         console.log(productName);
         console.log(productDescription);
