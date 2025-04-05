@@ -464,82 +464,155 @@ app.post('/drinks', authenticateToken, (req, res) => {
 });
 // }
 
-// ИЗМЕНЕНИЕ ЗАДАЧИ
-app.put('/todos/:id/edit', authenticateToken, (req, res) => {
+// ИЗМЕНЕНИЕ ПРОДУКЦИИ{
+// СЕТЫ
+app.put('/sets/:id/edit', authenticateToken, (req, res) => {
     // Извлекаем id задачи из параметров адресной строки
     const { id } = req.params;
-
     // Извлекаем данные из формы
-    const { text, deadline, priority } = req.body;
+    const { title, description, price } = req.body;
 
-    // Меняем значения задачи 
-    db.query('update todos set text = ?, deadline = ?, priority = ? where id = ?', [text, deadline, priority, id], (err, result) => {
+    // Меняем значения сета 
+    db.query('update sets set title = ?, description = ?, price = ? where id = ?', [title, description, price, id], (err, result) => {
         // обработка ошибки
-        if (err) return res.status(500).json({ message: 'Не удалось изменить статус задачи', error: err.message });
-
+        if (err) return res.status(500).json({ message: 'Не удалось изменить статус сетов', error: err.message });
         // Отправляем ответ
-        res.json({ message: 'Статус задачи изменен', taskEdit: { text, deadline, priority } });
+        res.json({ message: 'Статус сета изменен', setsEdit: { title, description, price } });
     });
 });
 
-
-// ИЗМЕНЕНИЕ СТАТУСА ЗАДАЧИ выполнено/не выполнено
-app.put('/todos/:id/complete', authenticateToken, (req, res) => {
+// СУШИ
+app.put('/sushi/:id/edit', authenticateToken, (req, res) => {
     // Извлекаем id задачи из параметров адресной строки
     const { id } = req.params;
+    // Извлекаем данные из формы
+    const { title, description, price } = req.body;
 
-    //  Запрос на изменение статуса выполнения задачи
-    db.query('update todos set completed = not completed where id = ?', [id], (err) => {
-        if (err) return res.status(500).json({ error: err.message, message: 'Не удалось изменить статус задачи' });
-        res.json(id);
+    // Меняем значения суши 
+    db.query('update sushi set title = ?, description = ?, price = ? where id = ?', [title, description, price, id], (err, result) => {
+        // обработка ошибки
+        if (err) return res.status(500).json({ message: 'Не удалось изменить статус суши', error: err.message });
+        // Отправляем ответ
+        res.json({ message: 'Статус суши изменен', sushiEdit: { title, description, price } });
     });
 });
 
-
-
-// ЗАКРЕПЛЕНИЕ ПОЛЬЗОВАТЕЛЯ ЗА ЗАДАЧЕЙ
-app.put('/todos/:id/pinned', authenticateToken, (req, res) => {
+// РОЛЛЫ
+app.put('/rolls/:id/edit', authenticateToken, (req, res) => {
     // Извлекаем id задачи из параметров адресной строки
     const { id } = req.params;
-    // Получаем данные пользователя из токена, которым мы проверяем аутентификацию
-    const { user } = req.body;
+    // Извлекаем данные из формы
+    const { title, description, price } = req.body;
 
-    //  Запрос на изменение статуса присвоения задачи пользователю
-    db.query('update todos set user_id = ? where id = ?', [user.id, id], (err) => {
-        if (err) return res.status(500).json({ error: err.message, message: 'Не удалось закрепить пользователя за задачей' });
-
-        res.json({ message: `Пользователь ${user.username} взял задачу`, taskId: id, userId: user.id, username: user.username });
+    // Меняем значения роллов 
+    db.query('update rolls set title = ?, description = ?, price = ? where id = ?', [title, description, price, id], (err, result) => {
+        // обработка ошибки
+        if (err) return res.status(500).json({ message: 'Не удалось изменить статус роллов', error: err.message });
+        // Отправляем ответ
+        res.json({ message: 'Статус роллов изменен', rollsEdit: { title, description, price } });
     });
 });
 
-// ОТКРЕПЛЕНИЕ ПОЛЬЗОВАТЕЛЯ ОТ ЗАДАЧИ
-app.put('/todos/:id/unpinning', authenticateToken, (req, res) => {
+// СОУСЫ
+app.put('/sauces/:id/edit', authenticateToken, (req, res) => {
     // Извлекаем id задачи из параметров адресной строки
     const { id } = req.params;
+    // Извлекаем данные из формы
+    const { title, description, price } = req.body;
 
-    //  Запрос на изменение статуса присвоения задачи пользователю
-    db.query('update todos set user_id = ? where id = ?', [null, id], (err) => {
-        if (err) return res.status(500).json({ error: err.message, message: 'Не удалось открепить пользователя от задачи' });
-
-        res.json({ taskId: id, userId: null, });
+    // Меняем значения соуса 
+    db.query('update sauces set title = ?, description = ?, price = ? where id = ?', [title, description, price, id], (err, result) => {
+        // обработка ошибки
+        if (err) return res.status(500).json({ message: 'Не удалось изменить статус соуса', error: err.message });
+        // Отправляем ответ
+        res.json({ message: 'Статус соуса изменен', saucesEdit: { title, description, price } });
     });
 });
 
+// НАПИТКИ
+app.put('/drinks/:id/edit', authenticateToken, (req, res) => {
+    // Извлекаем id задачи из параметров адресной строки
+    const { id } = req.params;
+    // Извлекаем данные из формы
+    const { title, description, price } = req.body;
 
-// УДАЛЕНИЕ ЗАДАЧИ
-app.delete('/todos/:id', authenticateToken, (req, res) => {
+    // Меняем значения напитка 
+    db.query('update drinks set title = ?, description = ?, price = ? where id = ?', [title, description, price, id], (err, result) => {
+        // обработка ошибки
+        if (err) return res.status(500).json({ message: 'Не удалось изменить статус напитка', error: err.message });
+        // Отправляем ответ
+        res.json({ message: 'Статус напитка изменен', drinksEdit: { title, description, price } });
+    });
+});
+// }
+
+
+// УДАЛЕНИЕ ПРОДУКЦИИ{
+// СЕТЫ
+app.delete('/sets/:id', authenticateToken, (req, res) => {
     // Извлекаем id задачи из параметров адресной строки
     const { id } = req.params;
 
     // Запрос на удаление
-    db.query('delete from todos where id = ?', [id], (err) => {
+    db.query('delete from sets where id = ?', [id], (err) => {
         // Обработка ошибки
-        if (err) return res.status(500).json({ message: "Ошибка удаления задачи" });
-
-        res.json({ message: 'Задача удалена' });
+        if (err) return res.status(500).json({ message: "Ошибка удаления сеты" });
+        res.json({ message: 'Сет удален' });
     });
 });
 
+// СУШИ
+app.delete('/sushi/:id', authenticateToken, (req, res) => {
+    // Извлекаем id задачи из параметров адресной строки
+    const { id } = req.params;
+
+    // Запрос на удаление
+    db.query('delete from sushi where id = ?', [id], (err) => {
+        // Обработка ошибки
+        if (err) return res.status(500).json({ message: "Ошибка удаления суши" });
+        res.json({ message: 'Суши удалены' });
+    });
+});
+
+// РОЛЛЫ
+app.delete('/rolls/:id', authenticateToken, (req, res) => {
+    // Извлекаем id задачи из параметров адресной строки
+    const { id } = req.params;
+
+    // Запрос на удаление
+    db.query('delete from rolls where id = ?', [id], (err) => {
+        // Обработка ошибки
+        if (err) return res.status(500).json({ message: "Ошибка удаления роллов" });
+        res.json({ message: 'Роллы удалены' });
+    });
+});
+
+// СОУСЫ
+app.delete('/sauces/:id', authenticateToken, (req, res) => {
+    // Извлекаем id задачи из параметров адресной строки
+    const { id } = req.params;
+
+    // Запрос на удаление
+    db.query('delete from sauces where id = ?', [id], (err) => {
+        // Обработка ошибки
+        if (err) return res.status(500).json({ message: "Ошибка удаления соуса" });
+        res.json({ message: 'Соус удален' });
+    });
+});
+
+// НАПИТКИ
+app.delete('/drinks/:id', authenticateToken, (req, res) => {
+    // Извлекаем id задачи из параметров адресной строки
+    const { id } = req.params;
+
+    // Запрос на удаление
+    db.query('delete from drinks where id = ?', [id], (err) => {
+        // Обработка ошибки
+        if (err) return res.status(500).json({ message: "Ошибка удаления напитка" });
+        res.json({ message: 'Напиток удален' });
+    });
+});
+// }
 // ============================================================================================
 
 
