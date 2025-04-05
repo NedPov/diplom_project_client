@@ -6,7 +6,6 @@ import { logoutUser } from "../slices/authenticate/authenticateSlice";
 import logo from '../images/cDttXgSOVH8.png'
 
 import Basket from "./Components/Basket";
-import Register from "./Components/Register";
 
 
 function Menu() {
@@ -79,7 +78,7 @@ function Menu() {
                     )}
                     {/* Корзина */}
                     <Basket />
-                    
+
                     {/* Регистрация */}
                     {isAuthenticated === true ? (
                         <li className="nav-item dropdown ms-auto">

@@ -7,12 +7,26 @@ import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 function Sauce() {
 
+    // redux
     const dispatch = useDispatch();
 
+    // массив соусов
     const sauces = useSelector((state) => state.sauces.sauces);
     console.log(sauces);
 
 
+    // получаем пользователя
+    const user = useSelector((state) => state.authenticate.user);
+
+    // По-дефолту будет user
+    let userRole = 'user';
+    // если пользователь определен, то ставим роль, которую он имеет
+    if (user) {
+        userRole = user.role;
+    }
+
+
+    // Запрос на загрузку продукции
     useEffect(() => {
         dispatch(loadSauces());
     }, [dispatch]);
@@ -24,7 +38,10 @@ function Sauce() {
             {
                 sauces.map((sauce) => (
                     <div className="card" style={{ width: '22rem' }} key={sauce.id}>
-                        <IconsEditOrDelete />
+                        {/* Если админка */}
+                        {userRole === 'admin' && (
+                            <IconsEditOrDelete />
+                        )}
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">

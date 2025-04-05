@@ -9,12 +9,26 @@ import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 function Set() {
 
+    // redux
     const dispatch = useDispatch();
 
+    // Получаем массив сетов
     const sets = useSelector((state) => state.sets.sets);
     console.log(sets);
 
 
+    // получаем пользователя
+    const user = useSelector((state) => state.authenticate.user);
+
+    // По-дефолту будет user
+    let userRole = 'user';
+    // если пользователь определен, то ставим роль, которую он имеет
+    if (user) {
+        userRole = user.role;
+    }
+
+
+    // Запрос на загрузку продукции
     useEffect(() => {
         dispatch(loadSets());
     }, [dispatch]);
@@ -27,7 +41,10 @@ function Set() {
                 sets.map((set) => (
                     <div className="card" style={{ width: '22rem' }} key={set.id}>
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
-                        <IconsEditOrDelete />
+                        {/* Если админка */}
+                        {userRole === 'admin' && (
+                            <IconsEditOrDelete />
+                        )}
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{set.title}</h5>

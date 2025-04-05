@@ -7,12 +7,26 @@ import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 function SushiCard() {
 
+    // redux
     const dispatch = useDispatch();
 
+    // Получаем массив суши
     const sushi = useSelector((state) => state.sushi.sushi);
     console.log(sushi);
 
 
+    // получаем пользователя
+    const user = useSelector((state) => state.authenticate.user);
+
+    // По-дефолту будет user
+    let userRole = 'user';
+    // если пользователь определен, то ставим роль, которую он имеет
+    if (user) {
+        userRole = user.role;
+    }
+
+
+    // Запрос на загрузку продукции
     useEffect(() => {
         dispatch(loadSushi());
     }, [dispatch]);
@@ -25,8 +39,10 @@ function SushiCard() {
                 sushi.map((sushiEl) => (
                     <div className="card" style={{ width: '22rem' }} key={sushiEl.id}>
                         {/* <img src="..." class="card-img-top" alt="..."/> */}
-                        
-                        <IconsEditOrDelete />
+                        {/* Если админка */}
+                        {userRole === 'admin' && (
+                            <IconsEditOrDelete />
+                        )}
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{sushiEl.title}</h5>
