@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { addFetchSets } from "../../slices/sets/setsSlice";
+import { addFetchDrinks } from "../../slices/drinks/drinksSlice";
+import { addFetchRolls } from "../../slices/rols/rollsSlice";
+import { addFetchSushi } from "../../slices/sushi/sushiSlice";
+import { addFetchSauces } from "../../slices/sauces/saucesSlice";
 
 
 function AdminPanel() {
@@ -42,7 +46,21 @@ function AdminPanel() {
         console.log(productType);
         console.log(image);
 
-        dispatch(addFetchSets({title, description, price}));
+        if(productType === 'set'){
+            dispatch(addFetchSets({title, description, price}));
+        }
+        if(productType === 'sushi'){
+            dispatch(addFetchSushi({title, description, price}));
+        }
+        if(productType === 'roll'){
+            dispatch(addFetchRolls({title, description, price}));
+        }
+        if(productType === 'sauces'){
+            dispatch(addFetchSauces({title, description, price}));
+        }
+        if(productType === 'drinks'){
+            dispatch(addFetchDrinks({title, description, price}));
+        }
 
         resetForm();
     };

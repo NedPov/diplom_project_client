@@ -1,4 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { logoutUser } from "../slices/authenticate/authenticateSlice";
 
 import logo from '../images/cDttXgSOVH8.png'
 
@@ -7,6 +10,33 @@ import Register from "./Components/Register";
 
 
 function Menu() {
+
+    // redux
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+
+    // проверка аутентификации пользователя 
+    const isAuthenticated = useSelector((state) => state.authenticate.isAuthenticated);
+
+    // получаем пользователя
+    const user = useSelector((state) => state.authenticate.user);
+
+
+    // По-дефолту будет user
+    let userRole = 'user';
+    // если пользователь определен, то ставим роль, которую он имеет
+    if (user) {
+        userRole = user.role;
+    }
+
+
+    // Метод выхода
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        navigate('/login');
+    };
+
 
     return (
         <>
@@ -40,15 +70,39 @@ function Menu() {
                         </ul>
                     </div>
                     {/* Админка */}
-                    <div className="me-5 p-2">
-                        <button className="btn btn-outline-warning">
-                            <NavLink className="nav-link" to='/adminPanel'> Админская панель</NavLink>
-                        </button>
-                    </div>
+                    {userRole === 'admin' && (
+                        <div className="me-5 p-2">
+                            <button className="btn btn-outline-warning">
+                                <NavLink className="nav-link" to='/adminPanel'> Админская панель</NavLink>
+                            </button>
+                        </div>
+                    )}
                     {/* Корзина */}
                     <Basket />
+                    
                     {/* Регистрация */}
-                    <Register />
+                    {isAuthenticated === true ? (
+                        <li className="nav-item dropdown ms-auto">
+                            <button className="btn btn-dark dropdown-toggle" data-bs-toggle='dropdown' aria-expanded='false'>
+                                {user.username}
+                            </button>
+                            <ul className="dropdown-menu dropdown-menu-dark">
+                                <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
+                            </ul>
+                        </li>
+                    ) : (
+                        <div className="navbar">
+                            <ul className="nav fw-bold">
+                                <li className="nav-item ">
+                                    <NavLink className="nav-link text-white" to='/login'>Вход</NavLink>
+                                </li>
+                                <li className="nav-item ">
+                                    <NavLink className="nav-link text-white" to='/register'>Регистрация</NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+
                 </div>
             </nav>
         </>
