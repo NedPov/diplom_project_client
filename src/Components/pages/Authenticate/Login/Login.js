@@ -35,12 +35,13 @@ function Login() {
         // сброс состояний
         setUsername('');
         setPassword('');
+        // Перенаправление на таски, если успешно зашли
+        if (isAuthenticated) {
+            navigate('/');
+        }
     };
 
-    // Перенаправление на таски, если успешно зашли
-    if (isAuthenticated) {
-        navigate('/');
-    }
+
 
 
 

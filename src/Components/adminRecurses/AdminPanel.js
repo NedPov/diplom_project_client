@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { addFetchSets } from "../../slices/sets/setsSlice";
 
 
 function AdminPanel() {
@@ -10,18 +11,18 @@ function AdminPanel() {
 
 
     // Состояния
-    const [productName, setProductName] = useState('');
-    const [productDescription, setProductDescription] = useState('');
-    const [productPrice, setProductPrice] = useState('');
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
     const [productType, setProductType] = useState('');
     const [image, setImage] = useState('');
 
 
     // reset Формы
     function resetForm() {
-        setProductName('');
-        setProductDescription('');
-        setProductPrice('');
+        setTitle('');
+        setDescription('');
+        setPrice('');
         setProductType('');
         setImage('');
     };
@@ -35,11 +36,13 @@ function AdminPanel() {
         // ДОБАВЛЕНИЕ ПРОДУКТА
         // !add
 
-        console.log(productName);
-        console.log(productDescription);
-        console.log(productPrice);
+        console.log(title);
+        console.log(description);
+        console.log(price);
         console.log(productType);
         console.log(image);
+
+        dispatch(addFetchSets({title, description, price}));
 
         resetForm();
     };
@@ -54,11 +57,11 @@ function AdminPanel() {
 
                         <div className="mb-3">
                             <label htmlFor="productName" className="form-label" >Название продукта</label>
-                            <input type="text" className="form-control" id="productName" value={productName} onChange={(e) => setProductName(e.target.value)} />
+                            <input type="text" className="form-control" id="productName" value={title} onChange={(e) => setTitle(e.target.value)} />
                         </div>
                         <div className="mb-3">
                             <label htmlFor="productDescription" className="form-label">Описание продукта</label>
-                            <input type="text" className="form-control" id="productDescription" value={productDescription} onChange={(e) => setProductDescription(e.target.value)} />
+                            <input type="text" className="form-control" id="productDescription" value={description} onChange={(e) => setDescription(e.target.value)} />
                         </div>
 
 
@@ -69,7 +72,7 @@ function AdminPanel() {
 
                         <div className="mb-3 col-4">
                             <label htmlFor="productPrice" className="form-label">Стоимость продукта</label>
-                            <input type="number" className="form-control" id="productPrice" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} />
+                            <input type="number" className="form-control" id="productPrice" value={price} onChange={(e) => setPrice(e.target.value)} />
                         </div>
 
                         <div className="mb-3 col-4">
