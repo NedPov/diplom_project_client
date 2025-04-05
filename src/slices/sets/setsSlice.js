@@ -53,6 +53,7 @@ const setsSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // СКИДКА
             .addCase(loadDiscountSets.fulfilled, (state, action) => {
                 state.discountSets = action.payload;
             })
