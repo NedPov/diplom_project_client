@@ -12,13 +12,13 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    // // redux
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch();
+    // redux
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    // // state
-    // const error = useSelector(state => state.authenticate.error);
-    // const isAuthenticated = useSelector(state => state.authenticate.isAuthenticated);
+    // state
+    const error = useSelector(state => state.authenticate.error);
+    const isAuthenticated = useSelector(state => state.authenticate.isAuthenticated);
 
 
     // отправка формы
@@ -26,19 +26,19 @@ function Login() {
         e.preventDefault();
 
         // вызов метода
-        // dispatch(loginUser({ username, password }));
+        dispatch(loginUser({ username, password }));
 
-        console.log({ username, password});
+        console.log({ username, password });
 
         // сброс состояний
         setUsername('');
         setPassword('');
     };
 
-    // // Перенаправление на таски, если успешно зашли
-    // if (isAuthenticated) {
-    //     navigate('/');
-    // }
+    // Перенаправление на таски, если успешно зашли
+    if (isAuthenticated) {
+        navigate('/');
+    }
 
 
 
@@ -46,10 +46,10 @@ function Login() {
     return (
         <div className="container my-2">
             <h2 className="mb-4">Вход</h2>
-{/* 
+
             {error && (
                 <div className="alert alert-danger">{error}</div>
-            )} */}
+            )}
 
             <form onSubmit={handleSubmit}>
                 <div className="form-group my-3">
