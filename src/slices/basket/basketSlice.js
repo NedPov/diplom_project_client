@@ -11,7 +11,13 @@ export const addBasketEl = createAsyncThunk('basket/addBasketEl', async (product
 });
 
 // Уменьшение количества
-export const decreaseBasketEl = createAsyncThunk('basket/decreaseBasketEl', async (id) =>{
+export const decreaseBasketEl = createAsyncThunk('basket/decreaseBasketEl', async (id) => {
+    // console.log(product);
+    return id;
+})
+
+// Увеличение количества
+export const increaseBasketEl = createAsyncThunk('basket/increaseBasketEl', async (id) => {
     // console.log(product);
     return id;
 })
@@ -40,7 +46,6 @@ const basketSlice = createSlice({
         builder
             // Добавление продукта
             .addCase(addBasketEl.fulfilled, (state, action) => {
-
                 for (let i = 0; i < state.basketArray.length; i++) {
                     if (state.basketArray[i].id == action.payload.id) {
                         state.basketArray[i].quantity++;
@@ -51,7 +56,23 @@ const basketSlice = createSlice({
                 }
                 state.basketArray.push(action.payload);
 
-
+                localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
+            })
+            // Уменьшение
+            .addCase(decreaseBasketEl.fulfilled, (state, action) => {
+                const product = state.basketArray.find(basketEl => basketEl.id === action.payload);
+                if (product) {
+                    if (product.quantity == 1){
+                        state.basketArray = state.basketArray.filter(basketArr => basketArr.id !== action.payload);
+                    }
+                        product.quantity--;
+                };
+                localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
+            })
+            // Увеличение
+            .addCase(increaseBasketEl.fulfilled, (state, action) => {
+                const product = state.basketArray.find(basketEl => basketEl.id === action.payload);
+                if (product) { product.quantity++ };
                 localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
             })
 
