@@ -10,6 +10,12 @@ export const addBasketEl = createAsyncThunk('basket/addBasketEl', async (product
     return product;
 });
 
+// Уменьшение количества
+export const decreaseBasketEl = createAsyncThunk('basket/decreaseBasketEl', async (id) =>{
+    // console.log(product);
+    return id;
+})
+
 // Удаление продукта
 export const deleteBasketEl = createAsyncThunk('basket/deleteBasketEl', async (id) => {
     return id;

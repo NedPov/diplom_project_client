@@ -5,6 +5,7 @@ import { useEffect } from "react";
 
 
 import { deleteBasketEl } from "../../../slices/basket/basketSlice";
+import { decreaseBasketEl } from "../../../slices/basket/basketSlice";
 
 
 
@@ -47,7 +48,11 @@ function Basket() {
                                     <div className="card-title  fw-bold">
                                         <span className="fs-2">{basketEl.price * basketEl.quantity}</span>
                                         <span className="fs-5">₽</span>
-                                        <span className="fs-2">{basketEl.quantity}</span>
+                                    </div>
+                                    <div className="card-title  fw-bold">
+                                        <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
+                                        <span className="fs-2 mx-3">{basketEl.quantity}</span>
+                                        <button className="fs-2" onClick={() => dispatch(deleteBasketEl(basketEl.id))}>+</button>
                                     </div>
                                 </div>
                             </div>
