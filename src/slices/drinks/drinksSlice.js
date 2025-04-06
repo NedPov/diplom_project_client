@@ -11,8 +11,8 @@ export const loadDrinks = createAsyncThunk('drinks/loadDrinks', async () => {
 });
 
 // Добавление напитка
-export const addFetchDrinks = createAsyncThunk('drinks/addFetchDrinks', async ({ title, description, price, productType  }) => {
-    return await addDrinks({ title, description, price, productType  });
+export const addFetchDrinks = createAsyncThunk('drinks/addFetchDrinks', async ({ title, description, price, productType, quantity  }) => {
+    return await addDrinks({ title, description, price, productType, quantity  });
 });
 
 // отправка на сервер измененного напитка

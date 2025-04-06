@@ -21,6 +21,7 @@ function AdminPanel() {
     const [productType, setProductType] = useState('');
     const [image, setImage] = useState('');
 
+    const quantity = 1;
 
     // reset Формы
     function resetForm() {
@@ -45,19 +46,19 @@ function AdminPanel() {
         console.log(image);
 
         if (productType === 'set') {
-            dispatch(addFetchSets({ title, description, price, productType }));
+            dispatch(addFetchSets({ title, description, price, productType, quantity }));
         }
         if (productType === 'sushi') {
-            dispatch(addFetchSushi({ title, description, price, productType }));
+            dispatch(addFetchSushi({ title, description, price, productType, quantity }));
         }
         if (productType === 'roll') {
-            dispatch(addFetchRolls({ title, description, price, productType }));
+            dispatch(addFetchRolls({ title, description, price, productType, quantity }));
         }
         if (productType === 'sauces') {
-            dispatch(addFetchSauces({ title, description, price, productType }));
+            dispatch(addFetchSauces({ title, description, price, productType, quantity }));
         }
         if (productType === 'drinks') {
-            dispatch(addFetchDrinks({ title, description, price, productType }));
+            dispatch(addFetchDrinks({ title, description, price, productType,quantity }));
         }
 
         resetForm();

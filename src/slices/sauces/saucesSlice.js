@@ -12,8 +12,8 @@ export const loadSauces = createAsyncThunk('sauces/loadSauces', async () => {
 });
 
 // Добавление соуса
-export const addFetchSauces = createAsyncThunk('sauces/addFetchSauces', async ({ title, description, price, productType  }) => {
-    return await addSauces({ title, description, price, productType  });
+export const addFetchSauces = createAsyncThunk('sauces/addFetchSauces', async ({ title, description, price, productType, quantity  }) => {
+    return await addSauces({ title, description, price, productType, quantity  });
 });
 
 // отправка на сервер измененного соуса

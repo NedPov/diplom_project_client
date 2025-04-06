@@ -21,7 +21,7 @@ function Basket() {
 
     if (basketArr) {
         basketArr.forEach(el => {
-            basketSum += el.price;
+            basketSum += el.price * el.quantity;
 
         });
         console.log(basketSum);

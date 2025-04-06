@@ -21,8 +21,8 @@ export const fetchDrinks = async () => {
 };
 
 // Запрос: Добавить напиток
-export const addDrinks = async ({title, description, price, productType }) => {
-    const response = await api.post('http://localhost:9876/addProducts', {title, description, price, productType});
+export const addDrinks = async ({title, description, price, productType, quantity }) => {
+    const response = await api.post('http://localhost:9876/addProducts', {title, description, price, productType, quantity});
     console.log(response.data);
     return response.data;
 };

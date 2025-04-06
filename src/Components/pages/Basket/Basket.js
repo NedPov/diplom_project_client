@@ -22,6 +22,7 @@ function Basket() {
     }
     console.log(basketArr);
 
+
     return (
         <>
             <h1>Basket</h1>
@@ -44,8 +45,9 @@ function Basket() {
                                 </div>
                                 <div className="card-body d-flex gap-5 align-items-end">
                                     <div className="card-title  fw-bold">
-                                        <span className="fs-2">{basketEl.price}</span>
+                                        <span className="fs-2">{basketEl.price * basketEl.quantity}</span>
                                         <span className="fs-5">₽</span>
+                                        <span className="fs-2">{basketEl.quantity}</span>
                                     </div>
                                 </div>
                             </div>

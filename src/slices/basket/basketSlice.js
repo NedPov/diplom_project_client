@@ -5,7 +5,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // =========================================
 
 // Добавление продукта
-export const addBasketEl = createAsyncThunk('basket/addBasketEl', async ( product ) => {
+export const addBasketEl = createAsyncThunk('basket/addBasketEl', async (product) => {
     console.log(product);
     return product;
 });
@@ -21,6 +21,7 @@ export const deleteBasketEl = createAsyncThunk('basket/deleteBasketEl', async (i
 // НАЧАЛЬНОЕ СОСТОЯНИЕ
 const initialState = {
     basketArray: JSON.parse(localStorage.getItem('basketArr')) || [],
+    // basketArray: [],
 };
 
 
@@ -33,7 +34,18 @@ const basketSlice = createSlice({
         builder
             // Добавление продукта
             .addCase(addBasketEl.fulfilled, (state, action) => {
+
+                for (let i = 0; i < state.basketArray.length; i++) {
+                    if (state.basketArray[i].id == action.payload.id) {
+                        state.basketArray[i].quantity++;
+                        console.log('уже есть');
+                        localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
+                        return
+                    }
+                }
                 state.basketArray.push(action.payload);
+
+
                 localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
             })
 

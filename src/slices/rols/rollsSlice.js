@@ -17,8 +17,8 @@ export const loadRolls = createAsyncThunk('rolls/loadRolls', async () => {
 });
 
 // Добавление ролла
-export const addFetchRolls = createAsyncThunk('rolls/addFetchRolls', async ({ title, description, price, productType  }) => {
-    return await addRolls({ title, description, price, productType  });
+export const addFetchRolls = createAsyncThunk('rolls/addFetchRolls', async ({ title, description, price, productType, quantity }) => {
+    return await addRolls({ title, description, price, productType, quantity  });
 });
 
 // отправка на сервер измененного ролла
