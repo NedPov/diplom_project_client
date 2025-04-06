@@ -5,22 +5,22 @@ import { fetchDrinks, addDrinks, editDrinks, deleteDrinks } from "./drinks";
 
 // FETCH ЗАПРОСЫ
 // =========================================
-// Получение всех сетов
+// Получение всех напитков
 export const loadDrinks = createAsyncThunk('drinks/loadDrinks', async () => {
     return await fetchDrinks();
 });
 
-// Добавление сета
-export const addFetchDrinks = createAsyncThunk('drinks/addFetchDrinks', async ({ title, description, price }) => {
-    return await addDrinks({ title, description, price });
+// Добавление напитка
+export const addFetchDrinks = createAsyncThunk('drinks/addFetchDrinks', async ({ title, description, price, productType  }) => {
+    return await addDrinks({ title, description, price, productType  });
 });
 
-// отправка на сервер измененного сета
+// отправка на сервер измененного напитка
 export const editFetchDrinks = createAsyncThunk('drinks/editFetchDrinks', async (title, description, price, drinksId) => {
     return await editDrinks({ title, description, price, drinksId });
 });
 
-// Удаление сета
+// Удаление напитка
 export const deleteFetchDrinks = createAsyncThunk('drinks/deleteFetchDrinks', async (id) => {
     return await deleteDrinks(id);
 });

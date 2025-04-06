@@ -10,7 +10,7 @@ function Basket() {
 
     // Массив продукции
     let basketArr = useSelector((state) => state.basket.basketArray);
-    
+
     if (basketArr.length == 0) {
         basketArr = JSON.parse(localStorage.getItem('basketArr'));
     }
@@ -19,11 +19,14 @@ function Basket() {
 
     let basketSum = 0;
 
-    basketArr.forEach(el => {
-        basketSum += el.price;
+    // if (basketArr) {
+    //     basketArr.forEach(el => {
+    //         basketSum += el.price;
 
-    });
-    console.log(basketSum);
+    //     });
+    //     console.log(basketSum);
+    // }
+
 
     return (
         <div className="navbar">

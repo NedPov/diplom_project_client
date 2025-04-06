@@ -22,8 +22,9 @@ export const loadSets = createAsyncThunk('sets/loadSets', async () => {
 });
 
 // Добавление сета
-export const addFetchSets = createAsyncThunk('sets/addFetchSets', async ({ title, description, price }) => {
-    return await addSets({ title, description, price });
+export const addFetchSets = createAsyncThunk('sets/addFetchSets', async ({ title, description, price, productType }) => {
+    console.log({title, description, price, productType })
+    return await addSets({ title, description, price, productType });
 });
 
 // отправка на сервер измененного сета

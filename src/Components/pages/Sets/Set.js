@@ -9,7 +9,9 @@ import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 
 function Set() {
+    const productType = 'set';
 
+    
     // redux
     const dispatch = useDispatch();
 

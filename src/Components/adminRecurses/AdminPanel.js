@@ -46,20 +46,20 @@ function AdminPanel() {
         console.log(productType);
         console.log(image);
 
-        if(productType === 'set'){
-            dispatch(addFetchSets({title, description, price}));
+        if (productType === 'set') {
+            dispatch(addFetchSets({ title, description, price, productType }));
         }
-        if(productType === 'sushi'){
-            dispatch(addFetchSushi({title, description, price}));
+        if (productType === 'sushi') {
+            dispatch(addFetchSushi({ title, description, price, productType }));
         }
-        if(productType === 'roll'){
-            dispatch(addFetchRolls({title, description, price}));
+        if (productType === 'roll') {
+            dispatch(addFetchRolls({ title, description, price, productType }));
         }
-        if(productType === 'sauces'){
-            dispatch(addFetchSauces({title, description, price}));
+        if (productType === 'sauces') {
+            dispatch(addFetchSauces({ title, description, price, productType }));
         }
-        if(productType === 'drinks'){
-            dispatch(addFetchDrinks({title, description, price}));
+        if (productType === 'drinks') {
+            dispatch(addFetchDrinks({ title, description, price, productType }));
         }
 
         resetForm();

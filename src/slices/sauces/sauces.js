@@ -16,13 +16,13 @@ const api = axios.create({
 
 // Запрос: Получение всех соусов
 export const fetchSauces = async () => {
-    const response = await api.get('/'); 
+    const response = await api.get('/');
     return response.data;
 };
 
 // Запрос: Добавить соус
-export const addSauces = async ({title, description, price }) => {
-    const response = await api.post('/', {title, description, price});
+export const addSauces = async ({ title, description, price, productType }) => {
+    const response = await api.post('http://localhost:9876/addProducts', { title, description, price, productType });
     console.log(response.data);
     return response.data;
 };
@@ -47,6 +47,6 @@ api.interceptors.request.use(async (config) => {
     let token = localStorage.getItem('accessToken');
     // Настраиваем что в заголовке Authorization будет наш токен доступа
     config.headers.Authorization = `Bearer ${token}`;
-    
+
     return config;
 });

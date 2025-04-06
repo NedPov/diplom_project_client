@@ -12,8 +12,8 @@ export const loadSushi = createAsyncThunk('sushi/loadSushi', async () => {
 });
 
 // Добавление суши
-export const addFetchSushi = createAsyncThunk('sushi/addFetchSushi', async ({ title, description, price }) => {
-    return await addSushi({ title, description, price });
+export const addFetchSushi = createAsyncThunk('sushi/addFetchSushi', async ({ title, description, price, productType }) => {
+    return await addSushi({ title, description, price, productType });
 });
 
 // отправка на сервер измененного суши

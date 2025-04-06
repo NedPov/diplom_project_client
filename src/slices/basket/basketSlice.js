@@ -5,8 +5,9 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 // =========================================
 
 // Добавление продукта
-export const addBasketEl = createAsyncThunk('basket/addBasketEl', async ({ title, description, price }) => {
-    return {title, description, price };
+export const addBasketEl = createAsyncThunk('basket/addBasketEl', async ( set ) => {
+    // return {title, description, price };
+    console.log(set);
 });
 
 // Удаление продукта

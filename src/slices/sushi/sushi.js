@@ -21,8 +21,8 @@ export const fetchSushi = async () => {
 };
 
 // Запрос: Добавить суши
-export const addSushi = async ({title, description, price }) => {
-    const response = await api.post('/', {title, description, price});
+export const addSushi = async ({title, description, price, productType }) => {
+    const response = await api.post('http://localhost:9876/addProducts', {title, description, price, productType});
     console.log(response.data);
     return response.data;
 };
