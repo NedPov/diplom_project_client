@@ -19,13 +19,13 @@ function Basket() {
 
     let basketSum = 0;
 
-    // if (basketArr) {
-    //     basketArr.forEach(el => {
-    //         basketSum += el.price;
+    if (basketArr) {
+        basketArr.forEach(el => {
+            basketSum += el.price;
 
-    //     });
-    //     console.log(basketSum);
-    // }
+        });
+        console.log(basketSum);
+    }
 
 
     return (
@@ -33,7 +33,7 @@ function Basket() {
             <ul className="nav fw-bold">
                 <li className="nav-item ">
                     <NavLink className="nav-link text-white" to='/basket'>
-                        <button className="btn btn-outline-danger  btn-lg">
+                        <button className="btn btn-outline-danger btn-lg d-flex gap-1">
                             <span><FaBasketShopping /></span>
                             <span>{basketSum}</span>
                             <span>₽</span>

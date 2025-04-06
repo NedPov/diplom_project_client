@@ -1,5 +1,10 @@
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+
+
+import { deleteBasketEl } from "../../../slices/basket/basketSlice";
 
 
 
@@ -11,8 +16,8 @@ function Basket() {
 
 
     // Массив продукции
-    let basketArr =  useSelector((state) => state.basket.basketArray);
-    if(basketArr.length == 0){
+    let basketArr = useSelector((state) => state.basket.basketArray);
+    if (basketArr.length == 0) {
         basketArr = JSON.parse(localStorage.getItem('basketArr'));
     }
     console.log(basketArr);
@@ -23,21 +28,28 @@ function Basket() {
             <div className="d-flex gap-5 p-5 flex-wrap justify-content-center">
 
                 {
-                    basketArr.map((basketEl) => (
-                        <div className="card" style={{ width: '22rem' }} key={Date.now()}>
-                            {/* <img src="..." class="card-img-top" alt="..."/> */}
-                            <div>Тут Должна быть картинка</div>
-                            <div className="card-body">
-                                <h5 className="card-title">{basketEl.title}</h5>
-                                <p className="card-text">{basketEl.description}</p>
-                            </div>
-                            <div className="card-body d-flex gap-5 align-items-end">
-                                <div className="card-title  fw-bold">
-                                    <span className="fs-2">{basketEl.price}</span>
-                                    <span className="fs-5">₽</span>
+                    (basketArr && (
+                        basketArr.map((basketEl) => (
+                            <div className="card" style={{ width: '22rem' }} key={basketEl.id}>
+                                <div className="container d-flex gap-3 justify-content-end position-absolute bottom-100 start-0 ">
+                                    <button className="btn btn-outline-danger btn-sm" onClick={() => dispatch(deleteBasketEl(basketEl.id))}>
+                                        <RiDeleteBin6Line />
+                                    </button>
+                                </div>
+                                {/* <img src="..." class="card-img-top" alt="..."/> */}
+                                <div>Тут Должна быть картинка</div>
+                                <div className="card-body">
+                                    <h5 className="card-title">{basketEl.title}</h5>
+                                    <p className="card-text">{basketEl.description}</p>
+                                </div>
+                                <div className="card-body d-flex gap-5 align-items-end">
+                                    <div className="card-title  fw-bold">
+                                        <span className="fs-2">{basketEl.price}</span>
+                                        <span className="fs-5">₽</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        ))
                     ))
                 }
             </div>

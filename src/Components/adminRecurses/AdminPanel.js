@@ -38,8 +38,6 @@ function AdminPanel() {
         e.preventDefault();
 
         // ДОБАВЛЕНИЕ ПРОДУКТА
-        // !add
-
         console.log(title);
         console.log(description);
         console.log(price);
