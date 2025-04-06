@@ -4,6 +4,9 @@ import { useEffect } from "react";
 import { loadDrinks } from "../../../slices/drinks/drinksSlice";
 import { addBasketEl } from "../../../slices/basket/basketSlice";
 
+import { decreaseBasketEl } from "../../../slices/basket/basketSlice";
+import { increaseBasketEl } from "../../../slices/basket/basketSlice";
+
 import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 
@@ -12,21 +15,26 @@ function Drink() {
     // redux
     const dispatch = useDispatch();
 
+
+    // ОТОБРАЖЕНИЕ ЭЛЕМЕНТОВ
+    // ==================================
+    // получаем пользователя
+    const user = useSelector((state) => state.authenticate.user);
+    // По-дефолту будет user
+    let userRole = 'user';
+    // если пользователь определен, то ставим роль, которую он имеет
+    if (user) { userRole = user.role; }
+    // ==================================
+
+
     // Массив напитков
     const drinks = useSelector((state) => state.drinks.drinks);
     console.log(drinks);
 
-
-    // получаем пользователя
-    const user = useSelector((state) => state.authenticate.user);
-
-    // По-дефолту будет user
-    let userRole = 'user';
-    // если пользователь определен, то ставим роль, которую он имеет
-    if (user) {
-        userRole = user.role;
-    }
-
+    // Массив корзины
+    let basketArr = useSelector((state) => state.basket.basketArray.filter(basketEl => basketEl.productType == 'drinks'));
+    if (basketArr.length == 0) { basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'drinks'); }
+    console.log(basketArr);
 
     // Запрос на загрузку продукции
     useEffect(() => {
@@ -56,16 +64,74 @@ function Drink() {
                                 <span className="fs-5">₽</span>
                             </div>
                             <div className="card-title fw-bold ">
-                                <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
-                                    Добавить в корзину
-                                </button>
+
+
+
+                                {basketArr.length == 0 ? (
+                                    <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
+                                        Добавить в корзину
+                                    </button>
+                                ): (
+                                    basketArr.map(basketEl => (
+                                        basketEl.id == drink.id ? (
+                                            <>
+                                                <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
+                                                <span className="fs-2 mx-3">{basketEl.quantity}</span>
+                                                <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
+                                            </>
+                                        ) : (
+                                            <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
+                                                Добавить в корзину
+                                            </button>
+                                        ))
+                                    )
+                                )}
+                                {/* {
+                                    basketArr.map(basketEl => (
+                                        basketEl.id == drink.id ? (
+                                            <>
+                                                <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
+                                                <span className="fs-2 mx-3">{basketEl.quantity}</span>
+                                                <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
+                                            </>
+                                        ) : (
+                                            <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
+                                                Добавить в корзину
+                                            </button>
+                                        ))
+                                    )
+                                } */}
+
+
+
+
+
+
+
+                                {/* {basketArr.length == 0 && (
+                                    <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
+                                        Добавить в корзину
+                                    </button>
+                                )}
+                                {basketArr.filter(el => drink.id == el.id).quantity == 1 ? (
+                                    <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
+                                        Добавить в корзину
+                                    </button>
+                                ) : (
+                                    <>
+                                        <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketArr.id))}>-</button>
+                                        <span className="fs-2 mx-3">{basketArr.quantity}</span>
+                                        <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketArr.id))}>+</button>
+                                    </>
+                                )} */}
+
                             </div>
                         </div>
                     </div>
                 ))
             }
 
-        </div>
+        </div >
     )
 };
 

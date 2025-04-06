@@ -64,8 +64,9 @@ const basketSlice = createSlice({
                 if (product) {
                     if (product.quantity == 1){
                         state.basketArray = state.basketArray.filter(basketArr => basketArr.id !== action.payload);
-                    }
+                    } else {
                         product.quantity--;
+                    }
                 };
                 localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
             })
