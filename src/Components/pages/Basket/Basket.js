@@ -12,6 +12,8 @@ import { increaseBasketEl } from "../../../slices/basket/basketSlice";
 
 function Basket() {
 
+
+
     // redux
     const dispatch = useDispatch();
 
@@ -24,44 +26,67 @@ function Basket() {
     }
     console.log(basketArr);
 
+    let basketSum = 0;
+
+    if (basketArr) {
+        basketArr.forEach(el => {
+            basketSum += el.price * el.quantity;
+
+        });
+        console.log(basketSum);
+    }
+
 
     return (
-        <>
+        <div className="container">
             <h1>Basket</h1>
-            <div className="d-flex gap-5 p-5 flex-wrap justify-content-center">
+            <ol className=" list-group list-group-numbered">
 
                 {
                     (basketArr && (
                         basketArr.map((basketEl) => (
-                            <div className="card" style={{ width: '22rem' }} key={basketEl.id}>
-                                <div className="container d-flex gap-3 justify-content-end position-absolute bottom-100 start-0 ">
-                                    <button className="btn btn-outline-danger btn-sm" onClick={() => dispatch(deleteBasketEl(basketEl.id))}>
+                            <li className="list-group-item row d-flex my-1 border border-info border-2 rounded">
+
+                                {/* <img src="..." class="card-img-top col" alt="..." /> */}
+                                <div className="col-3">Тут Должна быть картинка</div>
+
+                                <div className="col-4">
+                                    <div class="fw-bold">{basketEl.title}</div>
+                                    <span>{basketEl.description}</span>
+                                </div>
+
+                                <div className="col-2">
+                                    <span className="fs-2">{basketEl.price * basketEl.quantity}</span>
+                                    <span className="fs-5 ms-1">₽</span>
+                                </div>
+
+                                <div className="col-2 d-flex align-items-center">
+                                    <button className="btn btn-outline-danger" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
+                                    <span class="btn ">{basketEl.quantity}</span>
+                                    <button className="btn btn-outline-success" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
+                                </div>
+
+                                <div className="col d-flex align-items-center">
+                                    <button className="btn btn-danger btn-md" onClick={() => dispatch(deleteBasketEl(basketEl.id))}>
                                         <RiDeleteBin6Line />
                                     </button>
                                 </div>
-                                {/* <img src="..." class="card-img-top" alt="..."/> */}
-                                <div>Тут Должна быть картинка</div>
-                                <div className="card-body">
-                                    <h5 className="card-title">{basketEl.title}</h5>
-                                    <p className="card-text">{basketEl.description}</p>
-                                </div>
-                                <div className="card-body d-flex gap-5 align-items-end">
-                                    <div className="card-title  fw-bold">
-                                        <span className="fs-2">{basketEl.price * basketEl.quantity}</span>
-                                        <span className="fs-5">₽</span>
-                                    </div>
-                                    <div className="card-title  fw-bold">
-                                        <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
-                                        <span className="fs-2 mx-3">{basketEl.quantity}</span>
-                                        <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
-                                    </div>
-                                </div>
-                            </div>
+                            </li>
                         ))
                     ))
                 }
+
+            </ol>
+            <div className="d-flex justify-content-end fs-1">
+                <span>Итого: {basketSum} ₽</span>
             </div>
-        </>
+            <div className="row justify-content-center mt-3">
+                <button className="btn btn-info btn-lg border-dark border-2 col-6">
+                    Сформировать заказ
+                </button>
+            </div>
+
+        </div>
     )
 };
 
