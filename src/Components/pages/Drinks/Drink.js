@@ -65,73 +65,23 @@ function Drink() {
                             </div>
                             <div className="card-title fw-bold ">
 
-
-
-                                {basketArr.length == 0 ? (
-                                    <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
-                                        Добавить в корзину
-                                    </button>
-                                ): (
-                                    basketArr.map(basketEl => (
-                                        basketEl.id == drink.id ? (
-                                            <>
-                                                <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
-                                                <span className="fs-2 mx-3">{basketEl.quantity}</span>
-                                                <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
-                                            </>
-                                        ) : (
-                                            <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
-                                                Добавить в корзину
-                                            </button>
-                                        ))
+                                {
+                                    basketArr.find(basketEl => basketEl.id == drink.id) ? (
+                                        <button type="button" className="btn btn-info fs-6" disabled>
+                                            Уже в корзине
+                                        </button>
+                                    ) : (
+                                        <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
+                                            Добавить в корзину
+                                        </button>
                                     )
-                                )}
-                                {/* {
-                                    basketArr.map(basketEl => (
-                                        basketEl.id == drink.id ? (
-                                            <>
-                                                <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
-                                                <span className="fs-2 mx-3">{basketEl.quantity}</span>
-                                                <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
-                                            </>
-                                        ) : (
-                                            <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
-                                                Добавить в корзину
-                                            </button>
-                                        ))
-                                    )
-                                } */}
-
-
-
-
-
-
-
-                                {/* {basketArr.length == 0 && (
-                                    <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
-                                        Добавить в корзину
-                                    </button>
-                                )}
-                                {basketArr.filter(el => drink.id == el.id).quantity == 1 ? (
-                                    <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(drink))}>
-                                        Добавить в корзину
-                                    </button>
-                                ) : (
-                                    <>
-                                        <button className="fs-2" onClick={() => dispatch(decreaseBasketEl(basketArr.id))}>-</button>
-                                        <span className="fs-2 mx-3">{basketArr.quantity}</span>
-                                        <button className="fs-2" onClick={() => dispatch(increaseBasketEl(basketArr.id))}>+</button>
-                                    </>
-                                )} */}
-
+                                }
                             </div>
                         </div>
                     </div>
                 ))
             }
-
-        </div >
+        </div>
     )
 };
 
