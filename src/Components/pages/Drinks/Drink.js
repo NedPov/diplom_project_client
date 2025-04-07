@@ -64,7 +64,6 @@ function Drink() {
                                 <span className="fs-5">₽</span>
                             </div>
                             <div className="card-title fw-bold ">
-
                                 {
                                     basketArr.find(basketEl => basketEl.id == drink.id) ? (
                                         <button type="button" className="btn btn-info fs-6" disabled>

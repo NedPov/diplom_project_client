@@ -15,10 +15,14 @@ function Sauce() {
     const sauces = useSelector((state) => state.sauces.sauces);
     console.log(sauces);
 
+    // Массив корзины
+    let basketArr = useSelector((state) => state.basket.basketArray.filter(basketEl => basketEl.productType == 'sauces'));
+    if (basketArr.length == 0) { basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'sauces'); }
+    console.log(basketArr);
+
 
     // получаем пользователя
     const user = useSelector((state) => state.authenticate.user);
-
     // По-дефолту будет user
     let userRole = 'user';
     // если пользователь определен, то ставим роль, которую он имеет
@@ -55,9 +59,17 @@ function Sauce() {
                                 <span className="fs-5">₽</span>
                             </div>
                             <div className="card-title fw-bold ">
-                                <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(sauce))}>
-                                    Добавить в корзину
-                                </button>
+                                {
+                                    basketArr.find(basketEl => basketEl.id == sauce.id) ? (
+                                        <button type="button" className="btn btn-info fs-6" disabled>
+                                            Уже в корзине
+                                        </button>
+                                    ) : (
+                                        <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(sauce))}>
+                                            Добавить в корзину
+                                        </button>
+                                    )
+                                }
                             </div>
                         </div>
                     </div>
