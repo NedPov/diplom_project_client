@@ -5,9 +5,6 @@ import { fetchSets, addSets, editSets, deleteSets } from "./sets";
 
 // ПОЛУЧЕНИЕ СЕТОВ
 // =========================================
-// export const loadSets = createAsyncThunk('sets/loadSets', async () =>{
-//     return [{title: "sets1", description: "qwerty", id: 1, price: '1850'}, {title: "sets2", description: "asdfgh", id: 2, price: '1300'}, {title: "sets3", description: "zxcvbn", id: 3, price: '1150'},];
-// });
 // !Нужно переделать?
 export const loadDiscountSets = createAsyncThunk('sets/loadDiscountSets', async () => {
     return [{ title: "discountSets1", description: "qwerty", id: 1, price: '1850' }, { title: "discountSets2", description: "asdfgh", id: 2, price: '1300' }, { title: "discountSets3", description: "zxcvbn", id: 3, price: '1150' },];
@@ -67,7 +64,7 @@ const setsSlice = createSlice({
             })
             // Добавление сета
             .addCase(addFetchSets.fulfilled, (state, action) => {
-                state.sets.push(action.payload);
+                state.sets = [...state.sets, action.payload];
             })
             .addCase(addFetchSets.rejected, (state, action) => {
                 state.error = action.payload;

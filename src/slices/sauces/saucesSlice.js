@@ -51,7 +51,7 @@ const saucesSlice = createSlice({
             })
             // Добавление соуса
             .addCase(addFetchSauces.fulfilled, (state, action) => {
-                state.sauces.push(action.payload);
+                state.sauces = [...state.sauces, action.payload];
             })
             .addCase(addFetchSauces.rejected, (state, action) => {
                 state.error = action.payload;

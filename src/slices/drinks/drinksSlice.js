@@ -52,7 +52,7 @@ const drinksSlice = createSlice({
                     })
                     // Добавление напитка
                     .addCase(addFetchDrinks.fulfilled, (state, action) => {
-                        state.drinks.push(action.payload);
+                        state.drinks = [...state.drinks, action.payload];
                     })
                     .addCase(addFetchDrinks.rejected, (state, action) => {
                         state.error = action.payload;

@@ -58,7 +58,7 @@ const rollsSlice = createSlice({
             })
             // Добавление ролла
             .addCase(addFetchRolls.fulfilled, (state, action) => {
-                state.rolls.push(action.payload);
+                state.rolls = [...state.rolls, action.payload];
             })
             .addCase(addFetchRolls.rejected, (state, action) => {
                 state.error = action.payload;

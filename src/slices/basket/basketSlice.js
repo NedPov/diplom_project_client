@@ -54,8 +54,8 @@ const basketSlice = createSlice({
                         return
                     }
                 }
-                state.basketArray.push(action.payload);
-
+                state.basketArray = [...state.basketArray, action.payload];
+                
                 localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
             })
             // Уменьшение
@@ -82,7 +82,6 @@ const basketSlice = createSlice({
                 state.basketArray = state.basketArray.filter(basketArr => basketArr.id !== action.payload);
                 localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
             })
-
     }
 });
 

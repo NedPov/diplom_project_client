@@ -51,7 +51,7 @@ const sushiSlice = createSlice({
             })
             // Добавление сета
             .addCase(addFetchSushi.fulfilled, (state, action) => {
-                state.sushi.push(action.payload);
+                state.sushi = [...state.sushi, action.payload];
             })
             .addCase(addFetchSushi.rejected, (state, action) => {
                 state.error = action.payload;
