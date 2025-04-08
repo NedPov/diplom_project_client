@@ -1,7 +1,9 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import BasketPopUp from "../../Components/BasketPopUp";
 
 
 import { deleteBasketEl } from "../../../slices/basket/basketSlice";
@@ -12,6 +14,7 @@ import { increaseBasketEl } from "../../../slices/basket/basketSlice";
 
 function Basket() {
 
+    const [popUpOpen, setPopUpOpen] = useState(false);
 
 
     // redux
@@ -62,7 +65,7 @@ function Basket() {
 
                                 <div className="col-2 d-flex align-items-center">
                                     <button className="btn btn-outline-danger" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
-                                    <span class="btn ">{basketEl.quantity}</span>
+                                    <span className='text-center pt-2' style={{ width: "32px", height: "41px" }}>{basketEl.quantity}</span>
                                     <button className="btn btn-outline-success" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
                                 </div>
 
@@ -81,11 +84,13 @@ function Basket() {
                 <span>Итого: {basketSum} ₽</span>
             </div>
             <div className="row justify-content-center mt-3">
-                <button className="btn btn-info btn-lg border-dark border-2 col-6">
-                    Сформировать заказ
+                <button className="btn btn-info btn-lg border-dark border-2 col-6" data-bs-toggle="modal" data-bs-target="#registrationModal">
+                    Оформить заказ
                 </button>
             </div>
 
+            {/* Модалка для ввода данных */}
+            <BasketPopUp />
         </div>
     )
 };
