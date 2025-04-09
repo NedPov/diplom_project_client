@@ -1,23 +1,36 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { submittingOrder } from "../../slices/basket/basketSlice";
 
 
 
+function BasketPopUp({ basketArr, user_id }) {
 
+    const dispatch = useDispatch();
 
-function BasketPopUp() {
 
     const [orderCompleted, setOrderCompleted] = useState('false');
     console.log(orderCompleted);
 
+    console.log(basketArr);
+
+
     const [tel, setTel] = useState('');
+    const [name, setName] = useState('');
     const [address, setAddress] = useState('');
 
 
     const handleSubmit = (e) => {
 
+
+        dispatch(submittingOrder({basketArr, tel, name, address, user_id}));
+
+
         setOrderCompleted('true');
 
         setTel('');
+        setName('');
         setAddress('');
 
     }
@@ -37,11 +50,15 @@ function BasketPopUp() {
 
                                 <div class="modal-body">
                                     <div className="mb-3">
-                                        <label htmlFor="tel" className="form-label" >Веведите ваш номер телефона</label>
+                                        <label htmlFor="tel" className="form-label" >Веведите ваш номер телефона:</label>
                                         <input type="number" className="form-control" id="tel" value={tel} onChange={(e) => setTel(e.target.value)} />
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="address" className="form-label" >Веведите ваш адрес</label>
+                                        <label htmlFor="name" className="form-label" >Веведите ваше имя:</label>
+                                        <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+                                    </div>
+                                    <div className="mb-3">
+                                        <label htmlFor="address" className="form-label" >Веведите ваш адрес:</label>
                                         <input type="text" className="form-control" id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
                                     </div>
                                 </div>

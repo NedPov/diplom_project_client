@@ -14,6 +14,10 @@ import { increaseBasketEl } from "../../../slices/basket/basketSlice";
 
 function Basket() {
 
+    const user = JSON.parse(localStorage.getItem('user'));
+    const isAuthenticated = !!user; //приводим к boolean
+    console.log(isAuthenticated)
+
     const [popUpOpen, setPopUpOpen] = useState(false);
 
 
@@ -84,13 +88,22 @@ function Basket() {
                 <span>Итого: {basketSum} ₽</span>
             </div>
             <div className="row justify-content-center mt-3">
-                <button className="btn btn-info btn-lg border-dark border-2 col-6" data-bs-toggle="modal" data-bs-target="#registrationModal">
-                    Оформить заказ
-                </button>
+                {
+                    isAuthenticated ? (
+                        <button className="btn btn-info btn-lg border-dark border-2 col-6" data-bs-toggle="modal" data-bs-target="#registrationModal">
+                            Оформить заказ
+                        </button>
+                    ) : (
+                        <button className="btn btn-info btn-lg border-dark border-2 col-6" disabled>
+                           Чтобы оформить заказ, Вам необходимо зарегистрироваться
+                        </button>
+                )
+                }
+
             </div>
 
             {/* Модалка для ввода данных */}
-            <BasketPopUp />
+            <BasketPopUp basketArr={basketArr} user_id={user.id}/>
         </div>
     )
 };

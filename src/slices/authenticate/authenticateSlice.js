@@ -47,7 +47,7 @@ const authenticateSlice = createSlice({
     name: 'authenticate',
     initialState: {
         user: user || 'user',
-        isAuthenticated: isAuthenticated || false,
+        isAuthenticated: isAuthenticated || null,
         status: null,
         error: null,
     },

@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
+import { addFetchOrders } from "./basket";
 
 // =========================================
 
-// Добавление продукта
+// Добавление продукта в корзину
 export const addBasketEl = createAsyncThunk('basket/addBasketEl', async (product) => {
     console.log(product);
     return product;
@@ -29,11 +29,19 @@ export const deleteBasketEl = createAsyncThunk('basket/deleteBasketEl', async (i
 // =========================================
 
 
+// Отправка заказа на сервер
+export const submittingOrder = createAsyncThunk('basket/submittingOrder', async ({basketArr, tel, name, address, user_id}) =>{
+    return await addFetchOrders({basketArr, tel, name, address, user_id});
+});
+
+
+
+
 
 // НАЧАЛЬНОЕ СОСТОЯНИЕ
 const initialState = {
     basketArray: JSON.parse(localStorage.getItem('basketArr')) || [],
-    // basketArray: [],
+    orderArray: [],
 };
 
 
@@ -81,6 +89,11 @@ const basketSlice = createSlice({
             .addCase(deleteBasketEl.fulfilled, (state, action) => {
                 state.basketArray = state.basketArray.filter(basketArr => basketArr.id !== action.payload);
                 localStorage.setItem('basketArr', JSON.stringify(state.basketArray));
+            })
+            // Отправка заказа на сервер
+            .addCase(submittingOrder.fulfilled, (state, action) => {
+                state.orderArray = [...state.orderArray, action.payload];
+                console.log(action.payload);
             })
     }
 });
