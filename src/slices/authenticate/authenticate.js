@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const SERVER_URL = 'http://localhost:9876';
+const SERVER_URL = 'http://localhost:9875';
 
 
 // Настройка axios по дефолту

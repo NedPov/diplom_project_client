@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const SERVER_URL = 'http://localhost:9876/sets';
+const SERVER_URL = 'http://localhost:9875/sets';
 
 // Настройка axios по дефолту
 const api = axios.create({
@@ -23,7 +23,7 @@ export const fetchSets = async () => {
 // Запрос: Добавить сет
 export const addSets = async ({title, description, price, productType, quantity}) => {
     console.log({title, description, price, productType, quantity});
-    const response = await api.post('http://localhost:9876/addProducts', {title, description, price, productType, quantity});
+    const response = await api.post('http://localhost:9875/addProducts', {title, description, price, productType, quantity});
     console.log(response.data);
     return response.data;
 };

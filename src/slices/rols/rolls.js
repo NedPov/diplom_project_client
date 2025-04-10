@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const SERVER_URL = 'http://localhost:9876/rolls';
+const SERVER_URL = 'http://localhost:9875/rolls';
 
 // Настройка axios по дефолту
 const api = axios.create({
@@ -22,7 +22,7 @@ export const fetchRolls = async () => {
 
 // Запрос: Добавить роллы
 export const addRolls = async ({title, description, price, productType, quantity }) => {
-    const response = await api.post('http://localhost:9876/addProducts', {title, description, price, productType, quantity});
+    const response = await api.post('http://localhost:9875/addProducts', {title, description, price, productType, quantity});
     console.log(response.data);
     return response.data;
 };

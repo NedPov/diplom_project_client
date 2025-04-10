@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const SERVER_URL = 'http://localhost:9876/order';
+const SERVER_URL = 'http://localhost:9875/order';
 
 // Настройка axios по дефолту
 const api = axios.create({

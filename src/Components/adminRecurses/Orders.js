@@ -6,33 +6,35 @@ function Orders() {
     const orders = useSelector(state => state.basket.orderArray);
     console.log(orders);
 
-    // const order1 = orders[0].price.trim().split(' ');
-    // const order2 = orders[0].quantity.trim().split(' ');
-    // const order3 = orders[0].title.trim().split(' ');
-    // console.log(order1);
-    // console.log(order2);
-    // console.log(order3);
-
     return (
-        <>
-            <h1>ORDERS</h1>
-            {
-                orders.map((order) => (
-                    <div>
-                        <h2>Номер заказа: {order.id}</h2>
-                        <h2>Имя: {order.name}</h2>
-                        <h2>Тлф: {order.tel}</h2>
+        <div className="container">
+            <h1 className="text-center my-4">ЗАКАЗЫ</h1>
+            <div className="row justify-content-evenly gap-2">
+                {
+                    orders.map((order) => (
+                        <div key={order.id} className="card col-3" style={{ width: '20rem' }}>
+                            <h2 className="card-header row">
+                                <span className="my-1 list-group-item">Номер заказа: {order.id}</span>
+                                <span className="my-1 list-group-item">Имя: {order.name}</span>
+                                <span className="my-1 list-group-item">Телефон: {order.tel}</span>
+                                <span className="my-1 list-group-item">Адрес: {order.address}</span>
+                            </h2>
+                            <ul className="list-group list-group-flush">
+                                {
+                                    order.basketArr.map((basketEl) => (
+                                        <>
+                                            <li className="list-group-item">{basketEl.title}: {basketEl.quantity}</li>
+                                        </>
+                                    ))
+                                }
 
-                        <div>
-                            <span>order</span>
-                            <span></span>
-                            <span></span>
+                            </ul>
+
                         </div>
-                        
-                    </div>
-                ))
-            }
-        </>
+                    ))
+                }
+            </div>
+        </div>
 
     )
 };
