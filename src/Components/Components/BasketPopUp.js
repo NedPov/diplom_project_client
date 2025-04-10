@@ -9,6 +9,13 @@ function BasketPopUp({ basketArr, user_id }) {
 
     const dispatch = useDispatch();
 
+    // для получения номера заказа после отправки на сервер
+    let orders = useSelector(state => state.basket.orderArray);
+    if (orders.length == 0) {
+        orders = JSON.parse(localStorage.getItem('orders'));
+    }
+    console.log(orders);
+
 
     const [orderCompleted, setOrderCompleted] = useState('false');
     console.log(orderCompleted);
@@ -50,15 +57,15 @@ function BasketPopUp({ basketArr, user_id }) {
 
                                 <div class="modal-body">
                                     <div className="mb-3">
-                                        <label htmlFor="tel" className="form-label" >Веведите ваш номер телефона:</label>
+                                        <label htmlFor="tel" className="form-label" >Введите ваш номер телефона:</label>
                                         <input type="number" className="form-control" id="tel" value={tel} onChange={(e) => setTel(e.target.value)} />
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="name" className="form-label" >Веведите ваше имя:</label>
+                                        <label htmlFor="name" className="form-label" >Введите ваше имя:</label>
                                         <input type="text" className="form-control" id="name" value={name} onChange={(e) => setName(e.target.value)} />
                                     </div>
                                     <div className="mb-3">
-                                        <label htmlFor="address" className="form-label" >Веведите ваш адрес:</label>
+                                        <label htmlFor="address" className="form-label" >Введите ваш адрес:</label>
                                         <input type="text" className="form-control" id="address" value={address} onChange={(e) => setAddress(e.target.value)} />
                                     </div>
                                 </div>
@@ -80,7 +87,7 @@ function BasketPopUp({ basketArr, user_id }) {
                                 </div>
 
                                 <div class="modal-body text-center">
-                                    <h2>Номер заказа: 000000000</h2>
+                                    {/* <h2>Номер заказа: {orders.id}</h2> */}
                                     <p>Скоро вам поступит смс уведомление или звонок оператора о подтверждении заказа.</p>
                                     <p>Если у вас есть вопросы или подтверждение не пришло, звоните по телефону:</p>
                                     <h5>8-800-700-65-56</h5>

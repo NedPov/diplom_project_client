@@ -18,7 +18,6 @@ function Basket() {
     const isAuthenticated = !!user; //приводим к boolean
     console.log(isAuthenticated)
 
-    const [popUpOpen, setPopUpOpen] = useState(false);
 
 
     // redux
