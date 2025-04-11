@@ -54,7 +54,7 @@ function Basket() {
                 {
                     (basketArr ? (
                         basketArr.map((basketEl) => (
-                            <li className="list-group-item row d-flex my-1 border border-info border-2 rounded">
+                            <li className="list-group-item row d-flex my-1 border border-info border-2 rounded" key={basketEl.id}>
 
                                 {/* <img src="..." class="card-img-top col" alt="..." /> */}
                                 <div className="col-3">Тут Должна быть картинка</div>
@@ -114,11 +114,11 @@ function Basket() {
 
                         </div>
 
-                        {/* Модалка для ввода данных */}
-                        <BasketPopUp basketArr={basketArr} user_id={user.id} />
                     </>
                 ))
             }
+            {/* Модалка для ввода данных */}
+            <BasketPopUp userId={user.id} />
 
         </div>
     )

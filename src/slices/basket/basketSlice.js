@@ -42,8 +42,8 @@ export const loadMyOrders = createAsyncThunk('basket/loadMyOrders', async (id) =
 });
 
 // Отправка заказа на сервер
-export const submittingOrder = createAsyncThunk('basket/submittingOrder', async ({ basketArr, tel, name, address, user_id }) => {
-    return await addFetchOrders({ basketArr, tel, name, address, user_id });
+export const submittingOrder = createAsyncThunk('basket/submittingOrder', async ({ basketArr, tel, name, address, userId }) => {
+    return await addFetchOrders({ basketArr, tel, name, address, userId });
 });
 
 // Заказ приготовлен

@@ -27,8 +27,8 @@ export const fetchMyOrder = async (id) => {
 };
 
 // Запрос: Добавить заказ
-export const addFetchOrders = async ({basketArr, tel, name, address, user_id}) => {
-    const response = await api.post('/', {basketArr, tel, name, address, user_id});
+export const addFetchOrders = async ({basketArr, tel, name, address, userId}) => {
+    const response = await api.post('/', {basketArr, tel, name, address, userId});
     console.log(response.data);
     return response.data;
 };

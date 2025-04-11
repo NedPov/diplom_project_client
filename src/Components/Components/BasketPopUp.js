@@ -5,21 +5,21 @@ import { submittingOrder } from "../../slices/basket/basketSlice";
 
 
 
-function BasketPopUp({ basketArr, user_id }) {
+function BasketPopUp({ userId }) {
 
     const dispatch = useDispatch();
 
-    // для получения номера заказа после отправки на сервер
-    let orders = useSelector(state => state.basket.orderArray);
-    if (orders.length == 0) {
-        orders = JSON.parse(localStorage.getItem('orders'));
-    }
-    console.log(orders);
 
-
+    // переключение модалки
     const [orderCompleted, setOrderCompleted] = useState('false');
     console.log(orderCompleted);
 
+
+    // Массив продукции
+    let basketArr = useSelector((state) => state.basket.basketArray);
+    if (basketArr.length == 0) {
+        basketArr = JSON.parse(localStorage.getItem('basketArr'));
+    }
     console.log(basketArr);
 
 
@@ -30,8 +30,7 @@ function BasketPopUp({ basketArr, user_id }) {
 
     const handleSubmit = (e) => {
 
-
-        dispatch(submittingOrder({basketArr, tel, name, address, user_id}));
+        dispatch(submittingOrder({basketArr, tel, name, address, userId}));
 
 
         setOrderCompleted('true');
@@ -87,14 +86,13 @@ function BasketPopUp({ basketArr, user_id }) {
                                 </div>
 
                                 <div className="modal-body text-center">
-                                    {/* <h2>Номер заказа: {orders.id}</h2> */}
                                     <p>Скоро вам поступит смс уведомление или звонок оператора о подтверждении заказа.</p>
                                     <p>Если у вас есть вопросы или подтверждение не пришло, звоните по телефону:</p>
                                     <h5>8-800-700-65-56</h5>
                                 </div>
 
                                 <div className="modal-footer">
-                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" >Закрыть</button>
 
                                 </div>
                             </div>
