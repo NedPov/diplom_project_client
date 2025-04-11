@@ -33,6 +33,13 @@ export const addFetchOrders = async ({basketArr, tel, name, address, user_id}) =
 //     return response.data;
 // };
 
+// Запрос: Заказ приготовлен
+export const completeOrders = async (id) =>{
+    const response = await api.put(`/${id}/completed`);
+    console.log(response.data);
+    return response.data.id;
+}
+
 // Запрос: Удаление заказа
 export const deleteOrders = async (id) => {
     const response = await api.delete(`/${id}`);

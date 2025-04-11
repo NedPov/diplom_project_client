@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { addFetchOrders, deleteOrders, fetchOrder } from "./basket";
+import { addFetchOrders, deleteOrders, fetchOrder, completeOrders } from "./basket";
 
 // =========================================
 
@@ -39,6 +39,11 @@ export const loadOrders = createAsyncThunk('basket/loadOrders', async () => {
 // Отправка заказа на сервер
 export const submittingOrder = createAsyncThunk('basket/submittingOrder', async ({ basketArr, tel, name, address, user_id }) => {
     return await addFetchOrders({ basketArr, tel, name, address, user_id });
+});
+
+// Заказ приготовлен
+export const completedOrder = createAsyncThunk('basket/completedOrder', async (id) => {
+    return await completeOrders(id);
 });
 
 // Удаление заказа с сервера
@@ -122,6 +127,18 @@ const basketSlice = createSlice({
                 state.orderArray = [...state.orderArray, action.payload];
                 localStorage.setItem('orders', JSON.stringify(state.orderArray));
                 console.log(action.payload);
+            })
+            .addCase(submittingOrder.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            // Заказ приготовлен
+            .addCase(completedOrder.fulfilled, (state, action) => {
+                const order = state.orderArray.find(orderEl => orderEl.id == action.payload);
+                console.log(order)
+                if(order){order.completed = !order.completed};
+            })
+            .addCase(completedOrder.rejected, (state, action) => {
+                state.error = action.payload;
             })
             // Удаление заказа
             .addCase(deleteOrder.fulfilled, (state, action) => {
