@@ -10,6 +10,7 @@ import Sauces from './Components/pages/Sauces/Sauces';
 import Drinks from './Components/pages/Drinks/Drinks';
 import Sushi from './Components/pages/Sushi/Sushi';
 import Sets from './Components/pages/Sets/Sets';
+import MyOrders from './Components/pages/MyOrders/MyOrders';
 
 import Basket from './Components/pages/Basket/Basket';
 import Register from './Components/pages/Authenticate/Register/Register';
@@ -33,6 +34,8 @@ function App() {
               <Route path='/rolls' element={<Rolls />} />
               <Route path='/sauces' element={<Sauces />} />
               <Route path='/drinks' element={<Drinks />} />
+
+              <Route path='/myOrders' element={<MyOrders />} />
 
               {/* корзина */}
               <Route path='/basket' element={<Basket />} />

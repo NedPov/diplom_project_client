@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import { addFetchOrders, deleteOrders, fetchOrder, completeOrders } from "./basket";
+import { addFetchOrders, deleteOrders, fetchOrder, completeOrders, fetchMyOrder } from "./basket";
 
 // =========================================
 
@@ -36,6 +36,11 @@ export const loadOrders = createAsyncThunk('basket/loadOrders', async () => {
     return await fetchOrder();
 });
 
+// Получение ЛИЧНЫX заказов
+export const loadMyOrders = createAsyncThunk('basket/loadMyOrders', async (id) => {
+    return await fetchMyOrder(id);
+});
+
 // Отправка заказа на сервер
 export const submittingOrder = createAsyncThunk('basket/submittingOrder', async ({ basketArr, tel, name, address, user_id }) => {
     return await addFetchOrders({ basketArr, tel, name, address, user_id });
@@ -59,6 +64,7 @@ export const deleteOrder = createAsyncThunk('basket/deleteOrder', async (id) => 
 const initialState = {
     basketArray: JSON.parse(localStorage.getItem('basketArr')) || [],
     orderArray: [],
+    MyOrderArray: [],
     error: '',
 };
 
@@ -120,6 +126,19 @@ const basketSlice = createSlice({
                 console.log(Arr);
             })
             .addCase(loadOrders.rejected, (state, action) => {
+                state.error = action.payload;
+            })
+            // Получение ЛИЧНЫX заказов
+            .addCase(loadMyOrders.fulfilled, (state, action) => {
+                let Arr = [];
+                for (let i = 0; i < action.payload.length; i++) {
+                    action.payload[i].basketArr = JSON.parse(action.payload[i].basketArr);
+                    Arr.push(action.payload[i]);
+                }
+                state.MyOrderArray = Arr;
+                console.log(Arr);
+            })
+            .addCase(loadMyOrders.rejected, (state, action) => {
                 state.error = action.payload;
             })
             // Отправка заказа на сервер

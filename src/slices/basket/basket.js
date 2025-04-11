@@ -14,9 +14,15 @@ const api = axios.create({
 });
 
 
-// Запрос: Получение заказа
+// Запрос: Получение всех заказов
 export const fetchOrder = async () => {
     const response = await api.get('/'); 
+    return response.data;
+};
+
+// Запрос: Получение ЛИЧНОГО заказа
+export const fetchMyOrder = async (id) => {
+    const response = await api.get(`/${id}`); 
     return response.data;
 };
 

@@ -18,16 +18,6 @@ function Orders() {
     console.log(orders);
 
 
-    //! кейс на смену bg у карточки
-
-    const [color, setColor] = useState('card-header row')
-    // const setColor = (priority) => {
-    //     switch (priority) {
-    //         case "complete": return 'card-header row bg-green';
-    //         default: return 'card-header row';
-    //     }
-    // };
-
 
     // Запрос на загрузку заказов
     useEffect(() => {

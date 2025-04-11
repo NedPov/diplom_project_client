@@ -69,7 +69,7 @@ function Menu() {
                         </ul>
                     </div>
                     {/* Админка */}
-                    {userRole === 'admin' && (
+                    {userRole === 'admin' ? (
                         <div className="me-5 p-2 ">
                             <button className="btn btn-outline-warning m-1">
                                 <NavLink className="nav-link" to='/adminPanel'>Админская панель</NavLink>
@@ -77,8 +77,21 @@ function Menu() {
                             <button className="btn btn-outline-warning">
                                 <NavLink className="nav-link" to='/orders'>Заказы</NavLink>
                             </button>
+
+                            {/* ВРЕМЕННО */}
+                            <button className="btn btn-outline-warning m-1">
+                                <NavLink className="nav-link" to='/myOrders'>Мои заказы</NavLink>
+                            </button>
                         </div>
-                    )}
+                        
+                    ) : (
+                        <div className="me-5 p-2 ">
+                            <button className="btn btn-outline-warning m-1">
+                                <NavLink className="nav-link" to='/myOrders'>Мои заказы</NavLink>
+                            </button>
+                        </div>
+                    )
+                    }
                     {/* Корзина */}
                     <Basket />
                     {/* Регистрация */}
