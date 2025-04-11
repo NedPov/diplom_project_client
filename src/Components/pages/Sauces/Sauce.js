@@ -17,7 +17,11 @@ function Sauce() {
 
     // Массив корзины
     let basketArr = useSelector((state) => state.basket.basketArray.filter(basketEl => basketEl.productType == 'sauces'));
-    if (basketArr.length == 0) { basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'sauces'); }
+    if (basketArr.length == 0) {
+        if (localStorage.getItem('basketArr') !== null) {
+            basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'sauces');
+        }
+    }
     console.log(basketArr);
 
 

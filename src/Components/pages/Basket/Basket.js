@@ -2,6 +2,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import BasketPopUp from "../../Components/BasketPopUp";
 
@@ -22,6 +23,7 @@ function Basket() {
 
     // redux
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
 
@@ -32,8 +34,8 @@ function Basket() {
     }
     console.log(basketArr);
 
-    let basketSum = 0;
 
+    let basketSum = 0;
     if (basketArr) {
         basketArr.forEach(el => {
             basketSum += el.price * el.quantity;
@@ -45,11 +47,12 @@ function Basket() {
 
     return (
         <div className="container">
-            <h1>Basket</h1>
+            <h1 className="text-center">Корзина</h1>
             <ol className=" list-group list-group-numbered">
 
+
                 {
-                    (basketArr && (
+                    (basketArr ? (
                         basketArr.map((basketEl) => (
                             <li className="list-group-item row d-flex my-1 border border-info border-2 rounded">
 
@@ -57,7 +60,7 @@ function Basket() {
                                 <div className="col-3">Тут Должна быть картинка</div>
 
                                 <div className="col-4">
-                                    <div class="fw-bold">{basketEl.title}</div>
+                                    <div className="fw-bold">{basketEl.title}</div>
                                     <span>{basketEl.description}</span>
                                 </div>
 
@@ -79,30 +82,44 @@ function Basket() {
                                 </div>
                             </li>
                         ))
+                    ) : (
+                        <>
+                            <h2 className="fw-bold text-center m-5">В корзине пока нет товаров</h2>
+                            <div className="d-flex justify-content-center">
+                                <button className="btn btn-outline-primary col-6" onClick={() => navigate('/sets')}>Перейти в меню</button>
+                            </div>
+                        </>
                     ))
                 }
 
             </ol>
-            <div className="d-flex justify-content-end fs-1">
-                <span>Итого: {basketSum} ₽</span>
-            </div>
-            <div className="row justify-content-center mt-3">
-                {
-                    isAuthenticated ? (
-                        <button className="btn btn-info btn-lg border-dark border-2 col-6" data-bs-toggle="modal" data-bs-target="#registrationModal">
-                            Оформить заказ
-                        </button>
-                    ) : (
-                        <button className="btn btn-info btn-lg border-dark border-2 col-6" disabled>
-                           Чтобы оформить заказ, Вам необходимо зарегистрироваться
-                        </button>
-                )
-                }
+            {
+                (basketArr && (
+                    <>
+                        <div className="d-flex justify-content-end fs-1">
+                            <span>Итого: {basketSum} ₽</span>
+                        </div>
+                        <div className="row justify-content-center mt-3">
+                            {
+                                isAuthenticated ? (
+                                    <button className="btn btn-info btn-lg border-dark border-2 col-6" data-bs-toggle="modal" data-bs-target="#registrationModal">
+                                        Оформить заказ
+                                    </button>
+                                ) : (
+                                    <button className="btn btn-info btn-lg border-dark border-2 col-6" disabled>
+                                        Чтобы оформить заказ, Вам необходимо зарегистрироваться
+                                    </button>
+                                )
+                            }
 
-            </div>
+                        </div>
 
-            {/* Модалка для ввода данных */}
-            <BasketPopUp basketArr={basketArr} user_id={user.id}/>
+                        {/* Модалка для ввода данных */}
+                        <BasketPopUp basketArr={basketArr} user_id={user.id} />
+                    </>
+                ))
+            }
+
         </div>
     )
 };

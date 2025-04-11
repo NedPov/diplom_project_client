@@ -124,6 +124,10 @@ const basketSlice = createSlice({
             })
             // Отправка заказа на сервер
             .addCase(submittingOrder.fulfilled, (state, action) => {
+                // Обнуляем массив для корзины
+                state.basketArray = [];
+                localStorage.removeItem('basketArr');
+                // массив для заказов
                 state.orderArray = [...state.orderArray, action.payload];
                 localStorage.setItem('orders', JSON.stringify(state.orderArray));
                 console.log(action.payload);
@@ -135,7 +139,7 @@ const basketSlice = createSlice({
             .addCase(completedOrder.fulfilled, (state, action) => {
                 const order = state.orderArray.find(orderEl => orderEl.id == action.payload);
                 console.log(order)
-                if(order){order.completed = !order.completed};
+                if (order) { order.completed = !order.completed };
             })
             .addCase(completedOrder.rejected, (state, action) => {
                 state.error = action.payload;

@@ -17,7 +17,11 @@ function SushiCard() {
 
     // Массив корзины
     let basketArr = useSelector((state) => state.basket.basketArray.filter(basketEl => basketEl.productType == 'sushi'));
-    if (basketArr.length == 0) { basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'sushi'); }
+    if (basketArr.length == 0) {
+        if (localStorage.getItem('basketArr') !== null) {
+            basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'sushi');
+        }
+    }
     console.log(basketArr);
 
 

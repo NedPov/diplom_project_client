@@ -47,15 +47,15 @@ function BasketPopUp({ basketArr, user_id }) {
         <>
             {
                 orderCompleted == 'false' ? (
-                    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header d-flex ">
-                                    <h1 class="modal-title fs-3 " id="registrationModalLabel">Оформление заказа</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div className="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header d-flex ">
+                                    <h1 className="modal-title fs-3 " id="registrationModalLabel">Оформление заказа</h1>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
-                                <div class="modal-body">
+                                <div className="modal-body">
                                     <div className="mb-3">
                                         <label htmlFor="tel" className="form-label" >Введите ваш номер телефона:</label>
                                         <input type="number" className="form-control" id="tel" value={tel} onChange={(e) => setTel(e.target.value)} />
@@ -70,31 +70,31 @@ function BasketPopUp({ basketArr, user_id }) {
                                     </div>
                                 </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                                    <button type="button" class="btn btn-primary" onClick={handleSubmit}>Оформить</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                    <button type="button" className="btn btn-primary" onClick={handleSubmit}>Оформить</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ) : (
-                    <div class="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header d-flex ">
-                                    <h1 class="modal-title fs-3 " id="registrationModalLabel">Ваш заказ принят</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div className="modal fade" id="registrationModal" tabindex="-1" aria-labelledby="registrationModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header d-flex ">
+                                    <h1 className="modal-title fs-3 " id="registrationModalLabel">Ваш заказ принят</h1>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
 
-                                <div class="modal-body text-center">
+                                <div className="modal-body text-center">
                                     {/* <h2>Номер заказа: {orders.id}</h2> */}
                                     <p>Скоро вам поступит смс уведомление или звонок оператора о подтверждении заказа.</p>
                                     <p>Если у вас есть вопросы или подтверждение не пришло, звоните по телефону:</p>
                                     <h5>8-800-700-65-56</h5>
                                 </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Закрыть</button>
 
                                 </div>
                             </div>

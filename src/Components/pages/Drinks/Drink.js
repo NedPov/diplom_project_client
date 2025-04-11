@@ -33,8 +33,13 @@ function Drink() {
 
     // Массив корзины
     let basketArr = useSelector((state) => state.basket.basketArray.filter(basketEl => basketEl.productType == 'drinks'));
-    if (basketArr.length == 0) { basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'drinks'); }
+    if (basketArr.length == 0) {
+        if (localStorage.getItem('basketArr') !== null) {
+            basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'drinks');
+        }
+    }
     console.log(basketArr);
+
 
     // Запрос на загрузку продукции
     useEffect(() => {

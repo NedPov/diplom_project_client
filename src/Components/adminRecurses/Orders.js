@@ -37,11 +37,11 @@ function Orders() {
     return (
         <div className="container">
             <h1 className="text-center my-4">ЗАКАЗЫ</h1>
-            <div className="row justify-content-evenly gap-2">
+            <div className="row justify-content-evenly gap-3">
                 {
                     orders && (
                         orders.map((order) => (
-                            <div key={order.id} className="card col-3" style={{ width: '25rem'}}>
+                            <div key={order.id} className="card col-3 my-3" style={{ width: '25rem'}}>
                                 <h2 className={order.completed == 0 ? 'card-header row' : 'card-header row bg-success'} style={{height: '22rem'}}>
                                     <span className="my-1 list-group-item">Номер заказа: {order.id}</span>
                                     <span className="my-1 list-group-item">Имя: {order.name}</span>
@@ -59,9 +59,9 @@ function Orders() {
 
                                 </ul>
 
-                                <div className="row gap-1 m-1">
+                                <div className="row gap-1 m-1 my-3">
                                     {order.completed == 0 ? (
-                                        <button className="btn btn-outline-success col" onClick={() => dispatch(completedOrder(order.id))}> Приготовлено</button>
+                                        <button className="btn btn-outline-success col" onClick={() => dispatch(completedOrder(order.id))}>  Приготовлено</button>
                                     ) : (
                                         <button className="btn btn-outline-success col" disabled>Уже приготовлено</button>
                                     )
