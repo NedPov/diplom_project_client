@@ -50,9 +50,9 @@ function Roll() {
                     <div className="card position-relative" style={{ width: '22rem' }} key={roll.id} >
                         {/* Если админка */}
                         {userRole === 'admin' && (
-                            <IconsEditOrDelete />
+                            <IconsEditOrDelete id={roll.id}/>
                         )}
-                        {/* <img src="..." class="card-img-top" alt="..."/> */}
+                        <img src={`http://localhost:9875/${roll.fileData}`} className="card-img-top" alt="..."/>
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{roll.title}</h5>

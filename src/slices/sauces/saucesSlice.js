@@ -12,8 +12,8 @@ export const loadSauces = createAsyncThunk('sauces/loadSauces', async () => {
 });
 
 // Добавление соуса
-export const addFetchSauces = createAsyncThunk('sauces/addFetchSauces', async ({ title, description, price, productType, quantity  }) => {
-    return await addSauces({ title, description, price, productType, quantity  });
+export const addFetchSauces = createAsyncThunk('sauces/addFetchSauces', async ({ title, description, price, productType, quantity, imgUrl  }) => {
+    return await addSauces({ title, description, price, productType, quantity, imgUrl  });
 });
 
 // отправка на сервер измененного соуса
@@ -65,7 +65,7 @@ const saucesSlice = createSlice({
             })
             // Удаление соуса
             .addCase(deleteFetchSauces.fulfilled, (state, action) => {
-                state.sauces = state.sauces.filter(sauce => sauce.id !== action.payload);
+                state.sauces = state.sauces.filter(sauce => sauce.id != action.payload);
             })
             .addCase(deleteFetchSauces.rejected, (state, action) => {
                 state.error = action.payload;

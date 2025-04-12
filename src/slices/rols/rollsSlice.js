@@ -17,8 +17,8 @@ export const loadRolls = createAsyncThunk('rolls/loadRolls', async () => {
 });
 
 // Добавление ролла
-export const addFetchRolls = createAsyncThunk('rolls/addFetchRolls', async ({ title, description, price, productType, quantity }) => {
-    return await addRolls({ title, description, price, productType, quantity  });
+export const addFetchRolls = createAsyncThunk('rolls/addFetchRolls', async ({ title, description, price, productType, quantity, imgUrl }) => {
+    return await addRolls({ title, description, price, productType, quantity, imgUrl  });
 });
 
 // отправка на сервер измененного ролла
@@ -72,7 +72,7 @@ const rollsSlice = createSlice({
             })
             // Удаление ролла
             .addCase(deleteFetchRolls.fulfilled, (state, action) => {
-                state.rolls = state.rolls.filter(roll => roll.id !== action.payload);
+                state.rolls = state.rolls.filter(roll => roll.id != action.payload);
             })
             .addCase(deleteFetchRolls.rejected, (state, action) => {
                 state.error = action.payload;

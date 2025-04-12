@@ -49,9 +49,9 @@ function Sauce() {
                     <div className="card" style={{ width: '22rem' }} key={sauce.id}>
                         {/* Если админка */}
                         {userRole === 'admin' && (
-                            <IconsEditOrDelete />
+                            <IconsEditOrDelete id={sauce.id}/>
                         )}
-                        {/* <img src="..." class="card-img-top" alt="..."/> */}
+                        <img src={`http://localhost:9875/${sauce.fileData}`} className="card-img-top" alt="..."/>
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{sauce.title}</h5>

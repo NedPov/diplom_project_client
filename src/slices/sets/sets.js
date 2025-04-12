@@ -21,8 +21,8 @@ export const fetchSets = async () => {
 };
 
 // Запрос: Добавить сет
-export const addSets = async ({title, description, price, productType, quantity}) => {
-    console.log({title, description, price, productType, quantity});
+export const addSets = async ({title, description, price, productType, quantity, imgUrl}) => {
+    console.log({title, description, price, productType, quantity, imgUrl});
     const response = await api.post('http://localhost:9875/addProducts', {title, description, price, productType, quantity});
     console.log(response.data);
     return response.data;

@@ -11,8 +11,8 @@ export const loadDrinks = createAsyncThunk('drinks/loadDrinks', async () => {
 });
 
 // Добавление напитка
-export const addFetchDrinks = createAsyncThunk('drinks/addFetchDrinks', async ({ title, description, price, productType, quantity  }) => {
-    return await addDrinks({ title, description, price, productType, quantity  });
+export const addFetchDrinks = createAsyncThunk('drinks/addFetchDrinks', async ({ title, description, price, productType, quantity, imgUrl  }) => {
+    return await addDrinks({ title, description, price, productType, quantity, imgUrl  });
 });
 
 // отправка на сервер измененного напитка
@@ -22,6 +22,7 @@ export const editFetchDrinks = createAsyncThunk('drinks/editFetchDrinks', async 
 
 // Удаление напитка
 export const deleteFetchDrinks = createAsyncThunk('drinks/deleteFetchDrinks', async (id) => {
+    console.log(id);
     return await deleteDrinks(id);
 });
 // =========================================
@@ -57,16 +58,16 @@ const drinksSlice = createSlice({
                     .addCase(addFetchDrinks.rejected, (state, action) => {
                         state.error = action.payload;
                     })
-                    // Изменение напитка
-                    .addCase(editFetchDrinks.fulfilled, (state, action) => {
-                        // state.sets.push(action.payload);
-                    })
-                    .addCase(editFetchDrinks.rejected, (state, action) => {
-                        state.error = action.payload;
-                    })
+                    // // Изменение напитка
+                    // .addCase(editFetchDrinks.fulfilled, (state, action) => {
+                    //     // state.sets.push(action.payload);
+                    // })
+                    // .addCase(editFetchDrinks.rejected, (state, action) => {
+                    //     state.error = action.payload;
+                    // })
                     // Удаление напитка
                     .addCase(deleteFetchDrinks.fulfilled, (state, action) => {
-                        state.drinks = state.drinks.filter(drink => drink.id !== action.payload);
+                        state.drinks = state.drinks.filter(drink => drink.id != action.payload);
                     })
                     .addCase(deleteFetchDrinks.rejected, (state, action) => {
                         state.error = action.payload;

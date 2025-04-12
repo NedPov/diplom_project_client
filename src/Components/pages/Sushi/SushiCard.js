@@ -47,11 +47,12 @@ function SushiCard() {
             {
                 sushi.map((sushiEl) => (
                     <div className="card" style={{ width: '22rem' }} key={sushiEl.id}>
-                        {/* <img src="..." class="card-img-top" alt="..."/> */}
+                       
                         {/* Если админка */}
                         {userRole === 'admin' && (
-                            <IconsEditOrDelete />
+                            <IconsEditOrDelete id={sushiEl.id}/>
                         )}
+                        <img src={`http://localhost:9875/${sushiEl.fileData}`} className="card-img-top" alt="..."/>
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{sushiEl.title}</h5>

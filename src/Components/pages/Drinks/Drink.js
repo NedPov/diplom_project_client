@@ -4,10 +4,10 @@ import { useEffect } from "react";
 import { loadDrinks } from "../../../slices/drinks/drinksSlice";
 import { addBasketEl } from "../../../slices/basket/basketSlice";
 
-import { decreaseBasketEl } from "../../../slices/basket/basketSlice";
-import { increaseBasketEl } from "../../../slices/basket/basketSlice";
 
 import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
+
+
 
 
 function Drink() {
@@ -55,9 +55,9 @@ function Drink() {
                     <div className="card" style={{ width: '22rem' }} key={drink.id}>
                         {/* Если админка */}
                         {userRole === 'admin' && (
-                            <IconsEditOrDelete />
+                            <IconsEditOrDelete id={drink.id}/>
                         )}
-                        {/* <img src="..." class="card-img-top" alt="..."/> */}
+                        <img src={`http://localhost:9875/${drink.fileData}`} className="card-img-top" alt="..."/>
                         <div>Тут Должна быть картинка</div>
                         <div className="card-body">
                             <h5 className="card-title">{drink.title}</h5>

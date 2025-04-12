@@ -9,8 +9,6 @@ import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
 
 
 function Set() {
-    const productType = 'set';
-
 
     // redux
     const dispatch = useDispatch();
@@ -51,11 +49,11 @@ function Set() {
             {
                     sets.map((set) => (
                         <div className="card" style={{ width: '22rem' }} key={set.id}>
-                            {/* <img src="..." class="card-img-top" alt="..."/> */}
                             {/* Если админка */}
                             {userRole === 'admin' && (
-                                <IconsEditOrDelete />
+                                <IconsEditOrDelete id={set.id}/>
                             )}
+                            <img src={`http://localhost:9875/${set.fileData}`} className="card-img-top" alt="..."/>
                             <div>Тут Должна быть картинка</div>
                             <div className="card-body">
                                 <h5 className="card-title">{set.title}</h5>

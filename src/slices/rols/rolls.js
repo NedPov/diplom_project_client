@@ -21,8 +21,8 @@ export const fetchRolls = async () => {
 };
 
 // Запрос: Добавить роллы
-export const addRolls = async ({title, description, price, productType, quantity }) => {
-    const response = await api.post('http://localhost:9875/addProducts', {title, description, price, productType, quantity});
+export const addRolls = async ({title, description, price, productType, quantity, imgUrl }) => {
+    const response = await api.post('http://localhost:9875/addProducts', {title, description, price, productType, quantity, imgUrl});
     console.log(response.data);
     return response.data;
 };

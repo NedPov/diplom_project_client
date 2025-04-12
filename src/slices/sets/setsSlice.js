@@ -19,9 +19,9 @@ export const loadSets = createAsyncThunk('sets/loadSets', async () => {
 });
 
 // Добавление сета
-export const addFetchSets = createAsyncThunk('sets/addFetchSets', async ({ title, description, price, productType, quantity }) => {
-    console.log({title, description, price, productType, quantity })
-    return await addSets({ title, description, price, productType,quantity });
+export const addFetchSets = createAsyncThunk('sets/addFetchSets', async ({ title, description, price, productType, quantity, imgUrl }) => {
+    console.log({title, description, price, productType, quantity, imgUrl })
+    return await addSets({ title, description, price, productType,quantity, imgUrl });
 });
 
 // отправка на сервер измененного сета
@@ -78,7 +78,7 @@ const setsSlice = createSlice({
             })
             // Удаление сета
             .addCase(deleteFetchSets.fulfilled, (state, action) => {
-                state.sets = state.sets.filter(set => set.id !== action.payload);
+                state.sets = state.sets.filter(set => set.id != action.payload);
             })
             .addCase(deleteFetchSets.rejected, (state, action) => {
                 state.error = action.payload;

@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 
 import { addFetchSets } from "../../slices/sets/setsSlice";
 import { addFetchDrinks } from "../../slices/drinks/drinksSlice";
@@ -20,7 +22,7 @@ function AdminPanel() {
     const [price, setPrice] = useState('');
     const [productType, setProductType] = useState('');
     const [image, setImage] = useState('');
-
+    console.log(image);
     const quantity = 1;
 
     // reset Формы
@@ -32,11 +34,27 @@ function AdminPanel() {
         setImage('');
     };
 
+    const upload = async () => {
+        try {
+            const formData = new FormData();
+            formData.append('file', image);
+            console.log(formData);
+            const response = await axios.post('http://localhost:9875/upload', formData, { headers: { "Content-Type": "multipart/form-data" } });
+            console.log(response.data);
+            return response.data;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 
 
     // Отправка формы
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const imgUrl = await upload();
+        console.log(imgUrl);
 
         // ДОБАВЛЕНИЕ ПРОДУКТА
         console.log(title);
@@ -45,20 +63,21 @@ function AdminPanel() {
         console.log(productType);
         console.log(image);
 
+
         if (productType === 'set') {
-            dispatch(addFetchSets({ title, description, price, productType, quantity }));
+            dispatch(addFetchSets({ title, description, price, productType, quantity, imgUrl }));
         }
         if (productType === 'sushi') {
-            dispatch(addFetchSushi({ title, description, price, productType, quantity }));
+            dispatch(addFetchSushi({ title, description, price, productType, quantity, imgUrl }));
         }
         if (productType === 'roll') {
-            dispatch(addFetchRolls({ title, description, price, productType, quantity }));
+            dispatch(addFetchRolls({ title, description, price, productType, quantity, imgUrl}));
         }
         if (productType === 'sauces') {
-            dispatch(addFetchSauces({ title, description, price, productType, quantity }));
+            dispatch(addFetchSauces({ title, description, price, productType, quantity, imgUrl}));
         }
         if (productType === 'drinks') {
-            dispatch(addFetchDrinks({ title, description, price, productType,quantity }));
+            dispatch(addFetchDrinks({ title, description, price, productType,quantity, imgUrl}));
         }
 
         resetForm();
@@ -69,9 +88,9 @@ function AdminPanel() {
             <h1 className="text-center">AdminPanel</h1>
 
             <div className="">
-                <form className="bg-light border border-2 p-4" onSubmit={handleSubmit}>
+                <form className="bg-light border border-2 p-4" encType="multipart/form-data" onSubmit={handleSubmit}>
                     <div className="row">
-
+                        {/* <img src={imgUrl} alt="" /> */}
                         <div className="mb-3">
                             <label htmlFor="productName" className="form-label" >Название продукта</label>
                             <input type="text" className="form-control" id="productName" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -84,7 +103,7 @@ function AdminPanel() {
 
                         <div className="mt-2 col-4">
                             <label className="mb-1" htmlFor="fileInput">Загрузить изображение</label><br />
-                            <input type="file" className="form-control" id="fileInput" accept="image/png, image/jpeg" files={image} value={image} onChange={(e) => setImage(e.target.value)} />
+                            <input type="file" className="form-control" id="fileInput" name="filedata" accept="image/png, image/jpeg, image/jpg " files={image} onChange={(e) => setImage(e.target.files[0])} />
                         </div>
 
                         <div className="mb-3 col-4">

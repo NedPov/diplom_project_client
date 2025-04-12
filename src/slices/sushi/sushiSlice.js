@@ -12,8 +12,8 @@ export const loadSushi = createAsyncThunk('sushi/loadSushi', async () => {
 });
 
 // Добавление суши
-export const addFetchSushi = createAsyncThunk('sushi/addFetchSushi', async ({ title, description, price, productType, quantity }) => {
-    return await addSushi({ title, description, price, productType, quantity });
+export const addFetchSushi = createAsyncThunk('sushi/addFetchSushi', async ({ title, description, price, productType, quantity, imgUrl }) => {
+    return await addSushi({ title, description, price, productType, quantity, imgUrl });
 });
 
 // отправка на сервер измененного суши
@@ -65,7 +65,7 @@ const sushiSlice = createSlice({
             })
             // Удаление сета
             .addCase(deleteFetchSushi.fulfilled, (state, action) => {
-                state.sushi = state.sushi.filter(sushiEl => sushiEl.id !== action.payload);
+                state.sushi = state.sushi.filter(sushiEl => sushiEl.id != action.payload);
             })
             .addCase(deleteFetchSushi.rejected, (state, action) => {
                 state.error = action.payload;
