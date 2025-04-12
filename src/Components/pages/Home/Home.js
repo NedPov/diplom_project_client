@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-
+import img1 from '../../../images/master.jpeg'
 
 import BlockDiscountSets from "./BlockDiscountSets";
 import NewSet from "./NewSet";
@@ -14,26 +14,21 @@ function Home() {
 
 
     return (
-        <main className="container bg-primary">
-            <h1 className="text-center">Home</h1>
-            <h3 className="text-center mt-5">Супер акции недели</h3>
-            <div className="container d-flex gap-3 justify-content-center mt-4 bg-secondary">
-                <BlockDiscountSets />
-            </div>
-            <div className="container bg-secondary text-white my-5 d-flex justify-content-evenly">
-                <NewSet />
-            </div>
-            <div className="container bg-warning d-flex justify-content-around">
-                <div className="">
-                    <h4>Почему стоит выбрать именно нас</h4>
-                    <ul>
+        <main className="container">
+            <h1 className="text-center m-5">Главная</h1>
+            <div className=" d-flex justify-content-around border border-dark">
+                <div className="p-3">
+                    <h4  className="mb-5 fw-bold">Почему стоит выбрать именно нас</h4>
+                    <ul className="row gap-5 fs-5 fw-bold">
                         <li>Гарантируем вкуснейшее блюдо</li>
                         <li>Доставка от 30мин</li>
                         <li>Приготовлено исключительно из качественных продуктов</li>
                         <li>Контроль качества приготовления на каждом этапе</li>
                     </ul>
                 </div>
-                <div className="">ЗДЕСЬ ДОЛЖНО БЫТЬ ИЗОБРАЖЕНИЕ</div>
+                <div >
+                    <img src={img1} alt="" style={{width: '40rem'}}/>
+                </div>
             </div>
             
 
