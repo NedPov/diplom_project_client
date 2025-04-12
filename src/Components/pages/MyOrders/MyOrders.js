@@ -12,7 +12,10 @@ function MyOrders() {
 
 
     const user = JSON.parse(localStorage.getItem('user'));
-    const user_id = user.id;
+    let user_id = ''
+    if(user){
+        user_id = user.id;
+    }
 
 
 

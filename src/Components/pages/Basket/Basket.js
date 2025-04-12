@@ -117,7 +117,9 @@ function Basket() {
                 ))
             }
             {/* Модалка для ввода данных */}
-            <BasketPopUp userId={user.id} />
+            {user && (
+                <BasketPopUp userId={user.id} />
+            )}
 
         </div>
     )
