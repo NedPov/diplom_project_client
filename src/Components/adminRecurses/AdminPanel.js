@@ -31,7 +31,7 @@ function AdminPanel() {
         setDescription('');
         setPrice('');
         setProductType('');
-        setImage('');
+        setImage(null);
     };
 
     const upload = async () => {
