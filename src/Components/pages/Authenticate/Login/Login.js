@@ -6,9 +6,6 @@ import { loginUser } from "../../../../slices/authenticate/authenticateSlice";
 
 
 
-
-
-
 function Login() {
     // состояния
     const [username, setUsername] = useState('');

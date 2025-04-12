@@ -1,7 +1,6 @@
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import BasketPopUp from "../../Components/BasketPopUp";
@@ -56,9 +55,9 @@ function Basket() {
                         basketArr.map((basketEl) => (
                             <li className="list-group-item row d-flex my-1 border border-info border-2 rounded" key={basketEl.id}>
 
-                                {/* <img src="..." class="card-img-top col" alt="..." /> */}
-                                <div className="col-3">Тут Должна быть картинка</div>
-
+                                <div className="col-1 mx-2">
+                                    <img src={`http://localhost:9875/${basketEl.fileData}`} className="" alt="..." style={{ height: '4rem', width: '4rem' }} />
+                                </div>
                                 <div className="col-4">
                                     <div className="fw-bold">{basketEl.title}</div>
                                     <span>{basketEl.description}</span>
@@ -69,13 +68,13 @@ function Basket() {
                                     <span className="fs-5 ms-1">₽</span>
                                 </div>
 
-                                <div className="col-2 d-flex align-items-center">
+                                <div className="col-3 d-flex align-items-center">
                                     <button className="btn btn-outline-danger" onClick={() => dispatch(decreaseBasketEl(basketEl.id))}>-</button>
                                     <span className='text-center pt-2' style={{ width: "32px", height: "41px" }}>{basketEl.quantity}</span>
                                     <button className="btn btn-outline-success" onClick={() => dispatch(increaseBasketEl(basketEl.id))}>+</button>
                                 </div>
 
-                                <div className="col d-flex align-items-center">
+                                <div className="col-1 d-flex align-items-center">
                                     <button className="btn btn-danger btn-md" onClick={() => dispatch(deleteBasketEl(basketEl.id))}>
                                         <RiDeleteBin6Line />
                                     </button>

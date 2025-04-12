@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 
 import { FaBasketShopping } from "react-icons/fa6";
-import { useEffect } from "react";
+
 
 function Basket() {
 
