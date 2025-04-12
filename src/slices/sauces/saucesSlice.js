@@ -23,6 +23,7 @@ export const editFetchSauces = createAsyncThunk('sauces/editFetchSauces', async 
 
 // Удаление соуса
 export const deleteFetchSauces = createAsyncThunk('sauces/deleteFetchSauces', async (id) => {
+    console.log(id)
     return await deleteSauces(id);
 });
 // =========================================
@@ -65,6 +66,7 @@ const saucesSlice = createSlice({
             })
             // Удаление соуса
             .addCase(deleteFetchSauces.fulfilled, (state, action) => {
+                console.log(action.payload);
                 state.sauces = state.sauces.filter(sauce => sauce.id != action.payload);
             })
             .addCase(deleteFetchSauces.rejected, (state, action) => {

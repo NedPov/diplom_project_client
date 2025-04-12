@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import { loadDrinks } from "../../../slices/drinks/drinksSlice";
+import { loadDrinks, deleteFetchDrinks } from "../../../slices/drinks/drinksSlice";
 import { addBasketEl } from "../../../slices/basket/basketSlice";
 
 
-import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 
 
@@ -55,10 +55,13 @@ function Drink() {
                     <div className="card" style={{ width: '22rem' }} key={drink.id}>
                         {/* Если админка */}
                         {userRole === 'admin' && (
-                            <IconsEditOrDelete id={drink.id}/>
+                            <div className="container d-flex gap-3 justify-content-end position-absolute bottom-100 start-0 ">
+                                <button className="btn btn-outline-danger btn-sm" onClick={() => dispatch(deleteFetchDrinks(drink.id))}>
+                                    <RiDeleteBin6Line />
+                                </button>
+                            </div>
                         )}
-                        <img src={`http://localhost:9875/${drink.fileData}`} className="card-img-top" alt="..."/>
-                        <div>Тут Должна быть картинка</div>
+                        <img src={`http://localhost:9875/${drink.fileData}`} className="card-img-top" alt="..." style={{height: '18rem'}}/>
                         <div className="card-body">
                             <h5 className="card-title">{drink.title}</h5>
                             <p className="card-text">{drink.description}</p>

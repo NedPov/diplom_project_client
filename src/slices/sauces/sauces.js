@@ -36,6 +36,8 @@ export const editSauces = async (title, description, price, saucesId) => {
 // Запрос: Удаление соуса
 export const deleteSauces = async (id) => {
     const response = await api.delete(`/${id}`);
+    console.log(response.data)
+    console.log(response.data.id)
     return response.data.id;
 };
 

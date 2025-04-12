@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
-import { loadSets } from "../../../slices/sets/setsSlice";
+import { loadSets, deleteFetchSets } from "../../../slices/sets/setsSlice";
 import { addBasketEl } from "../../../slices/basket/basketSlice";
 
 
-import IconsEditOrDelete from "../../adminRecurses/IconsEditOrDelete";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 
 function Set() {
@@ -21,7 +21,7 @@ function Set() {
     let basketArr = useSelector((state) => state.basket.basketArray.filter(basketEl => basketEl.productType == 'set')) || [];
     console.log(basketArr);
     if (basketArr.length == 0) {
-        if (localStorage.getItem('basketArr') !== null){
+        if (localStorage.getItem('basketArr') !== null) {
             basketArr = JSON.parse(localStorage.getItem('basketArr')).filter(basketEl => basketEl.productType == 'set');
         }
     }
@@ -47,39 +47,42 @@ function Set() {
         <div className="d-flex gap-5 p-5 flex-wrap justify-content-center">
 
             {
-                    sets.map((set) => (
-                        <div className="card" style={{ width: '22rem' }} key={set.id}>
-                            {/* Если админка */}
-                            {userRole === 'admin' && (
-                                <IconsEditOrDelete id={set.id}/>
-                            )}
-                            <img src={`http://localhost:9875/${set.fileData}`} className="card-img-top" alt="..."/>
-                            <div>Тут Должна быть картинка</div>
-                            <div className="card-body">
-                                <h5 className="card-title">{set.title}</h5>
-                                <p className="card-text">{set.description}</p>
+                sets.map((set) => (
+                    <div className="card" style={{ width: '22rem' }} key={set.id}>
+                        {/* Если админка */}
+                        {userRole === 'admin' && (
+                            <div className="container d-flex gap-3 justify-content-end position-absolute bottom-100 start-0 ">
+                                <button className="btn btn-outline-danger btn-sm" onClick={() => dispatch(deleteFetchSets(set.id))}>
+                                    <RiDeleteBin6Line />
+                                </button>
                             </div>
-                            <div className="card-body d-flex gap-5 align-items-end">
-                                <div className="card-title  fw-bold">
-                                    <span className="fs-2">{set.price}</span>
-                                    <span className="fs-5">₽</span>
-                                </div>
-                                <div className="card-title fw-bold ">
-                                    {
-                                        basketArr.find(basketEl => basketEl.id == set.id) ? (
-                                            <button type="button" className="btn btn-info fs-6" disabled>
-                                                Уже в корзине
-                                            </button>
-                                        ) : (
-                                            <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(set))}>
-                                                Добавить в корзину
-                                            </button>
-                                        )
-                                    }
-                                </div>
+                        )}
+                        <img src={`http://localhost:9875/${set.fileData}`} className="card-img-top" alt="..." style={{height: '18rem'}}/>
+                        <div className="card-body">
+                            <h5 className="card-title">{set.title}</h5>
+                            <p className="card-text">{set.description}</p>
+                        </div>
+                        <div className="card-body d-flex gap-5 align-items-end">
+                            <div className="card-title  fw-bold">
+                                <span className="fs-2">{set.price}</span>
+                                <span className="fs-5">₽</span>
+                            </div>
+                            <div className="card-title fw-bold ">
+                                {
+                                    basketArr.find(basketEl => basketEl.id == set.id) ? (
+                                        <button type="button" className="btn btn-info fs-6" disabled>
+                                            Уже в корзине
+                                        </button>
+                                    ) : (
+                                        <button type="button" className="btn btn-info fs-6" onClick={() => dispatch(addBasketEl(set))}>
+                                            Добавить в корзину
+                                        </button>
+                                    )
+                                }
                             </div>
                         </div>
-                    ))
+                    </div>
+                ))
             }
 
         </div>
